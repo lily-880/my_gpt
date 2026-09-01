@@ -1,0 +1,9 @@
+torch>=2.0
+transformers>=4.40
+datasets>=2.14
+matplotlib>=3.7
+torch-ao>=0.3
+vllm>=0.5
+pytest>=7.0
+tqdm
+numpy
