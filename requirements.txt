@@ -1,9 +1,9 @@
-torch>=2.0
+# 本地：写代码、CPU 单元测试。不要在本机装 vLLM。
+# torch 请用 CPU 轮子（见 README）；不要写成无 index 的 pip install torch，
+# 否则会下一整套 CUDA，本机又用不上。
 transformers>=4.40
 datasets>=2.14
 matplotlib>=3.7
-torch-ao>=0.3
-vllm>=0.5
 pytest>=7.0
 tqdm
 numpy

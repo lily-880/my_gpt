@@ -13,12 +13,14 @@ build/
 # Jupyter
 .ipynb_checkpoints/
 
-# Logs & checkpoints
+# Logs, weights, local data
 logs/
 checkpoints/
+data/
 *.pt
 *.pth
 *.ckpt
+*.bin
 
 # IDE
 .vscode/

@@ -1,0 +1,9 @@
+# 云 GPU：先装带 CUDA 的 PyTorch（按云镜像或 pytorch.org 说明），
+# 再装下面这些。不要在本机 WSL 无卡环境执行本文件。
+transformers>=4.40
+datasets>=2.14
+matplotlib>=3.7
+pytest>=7.0
+tqdm
+numpy
+vllm>=0.5

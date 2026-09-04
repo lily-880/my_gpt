@@ -1,0 +1,146 @@
+"""Decoder-only GPT 的底层积木（Day 2）。整模型堆叠放到 Day 3。
+
+刻意不用 FlashAttention / GQA / QK-Norm，方便把公式写成看得见的矩阵乘法。
+"""
+
+from __future__ import annotations
+
+import math
+from dataclasses import dataclass
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+@dataclass
+class GPTConfig:
+    n_layer: int = 6
+    n_head: int = 8
+    n_embd: int = 512
+    block_size: int = 256
+    vocab_size: int = 50257
+    dropout: float = 0.0
+    pos_encoding: str = "rope"  # "rope" 或 "learned"
+
+
+def build_causal_mask(seq_len: int, device: torch.device | None = None) -> torch.Tensor:
+    """下三角为 True：位置 i 只能看见 j <= i。形状 (1, 1, T, T)，方便广播到 (B, H, T, T)。"""
+    ones = torch.ones(seq_len, seq_len, dtype=torch.bool, device=device)
+    return torch.tril(ones)[None, None, :, :]
+
+
+class RMSNorm(nn.Module):
+    """按最后一维做 RMS 归一化，再乘可学习的缩放。nanochat 的 rms_norm 没有这组 weight。"""
+
+    def __init__(self, dim: int, eps: float = 1e-6):
+        super().__init__()
+        self.eps = eps
+        self.weight = nn.Parameter(torch.ones(dim))
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # 用 float32 算方差，避免半精度下 underflow
+        x_f = x.float()
+        rms = torch.sqrt(x_f.pow(2).mean(dim=-1, keepdim=True) + self.eps)
+        return (self.weight * (x_f / rms)).type_as(x)
+
+
+def precompute_rope(seq_len: int, head_dim: int, base: float = 10000.0, device=None):
+    """预先算好每个位置、每个偶数通道的 cos/sin。返回形状 (1, 1, T, D/2)。"""
+    if head_dim % 2 != 0:
+        raise ValueError("RoPE 要求 head_dim 为偶数")
+    inv_freq = 1.0 / (
+        base ** (torch.arange(0, head_dim, 2, device=device, dtype=torch.float32) / head_dim)
+    )
+    positions = torch.arange(seq_len, device=device, dtype=torch.float32)
+    freqs = torch.outer(positions, inv_freq)
+    cos = freqs.cos()[None, None, :, :]
+    sin = freqs.sin()[None, None, :, :]
+    return cos, sin
+
+
+def apply_rope(x: torch.Tensor, cos: torch.Tensor, sin: torch.Tensor) -> torch.Tensor:
+    """把 RoPE 加到 q 或 k 上。x 形状 (B, H, T, D)，把最后一维拆成两半再旋转。"""
+    half = x.size(-1) // 2
+    x1, x2 = x[..., :half], x[..., half:]
+    # 教科书方向：角度为 +theta。nanochat 用了 -theta，相对位置仍然成立。
+    y1 = x1 * cos - x2 * sin
+    y2 = x1 * sin + x2 * cos
+    return torch.cat([y1, y2], dim=-1)
+
+
+def causal_attention(q: torch.Tensor, k: torch.Tensor, v: torch.Tensor, dropout_p: float = 0.0) -> torch.Tensor:
+    """单头或多头共用：q/k/v 都是 (B, H, T, D)，H=1 就是单头。"""
+    t = q.size(-2)
+    scale = 1.0 / math.sqrt(q.size(-1))
+    scores = (q @ k.transpose(-2, -1)) * scale
+    mask = build_causal_mask(t, device=q.device)
+    scores = scores.masked_fill(~mask, float("-inf"))
+    weights = F.softmax(scores, dim=-1)
+    weights = F.dropout(weights, p=dropout_p, training=True)
+    return weights @ v
+
+
+class CausalSelfAttention(nn.Module):
+    """多头因果注意力；n_head=1 时退化为单头。"""
+
+    def __init__(self, config: GPTConfig):
+        super().__init__()
+        if config.n_embd % config.n_head != 0:
+            raise ValueError("n_embd 必须能被 n_head 整除")
+        self.n_head = config.n_head
+        self.head_dim = config.n_embd // config.n_head
+        self.dropout = config.dropout
+        self.use_rope = config.pos_encoding == "rope"
+
+        self.c_attn = nn.Linear(config.n_embd, 3 * config.n_embd, bias=False)
+        self.c_proj = nn.Linear(config.n_embd, config.n_embd, bias=False)
+
+        cos, sin = precompute_rope(config.block_size, self.head_dim)
+        self.register_buffer("cos", cos, persistent=False)
+        self.register_buffer("sin", sin, persistent=False)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        b, t, c = x.shape
+        if t > self.cos.size(2):
+            raise ValueError(f"序列长度 {t} 超过 block_size={self.cos.size(2)}")
+
+        qkv = self.c_attn(x)
+        q, k, v = qkv.split(c, dim=-1)
+        q = q.view(b, t, self.n_head, self.head_dim).transpose(1, 2)
+        k = k.view(b, t, self.n_head, self.head_dim).transpose(1, 2)
+        v = v.view(b, t, self.n_head, self.head_dim).transpose(1, 2)
+
+        if self.use_rope:
+            cos = self.cos[:, :, :t, :]
+            sin = self.sin[:, :, :t, :]
+            q, k = apply_rope(q, cos, sin), apply_rope(k, cos, sin)
+
+        y = causal_attention(q, k, v, dropout_p=self.dropout if self.training else 0.0)
+        y = y.transpose(1, 2).contiguous().view(b, t, c)
+        return self.c_proj(y)
+
+
+class FeedForward(nn.Module):
+    """两层 MLP，中间放大 4 倍。激活用 GELU（GPT-2 常见）；nanochat 用的是 ReLU²。"""
+
+    def __init__(self, config: GPTConfig):
+        super().__init__()
+        hidden = 4 * config.n_embd
+        self.c_fc = nn.Linear(config.n_embd, hidden, bias=False)
+        self.act = nn.GELU()
+        self.c_proj = nn.Linear(hidden, config.n_embd, bias=False)
+        self.dropout = nn.Dropout(config.dropout)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.dropout(self.c_proj(self.act(self.c_fc(x))))
+
+
+class GPT(nn.Module):
+    def __init__(self, config: GPTConfig):
+        super().__init__()
+        self.config = config
+        raise NotImplementedError("Day 3：用 RMSNorm + Attention + FFN 堆叠 TransformerBlock")
+
+    def forward(self, idx: torch.Tensor, labels: torch.Tensor | None = None):
+        raise NotImplementedError("Day 3：返回 logits，可选交叉熵 loss")
