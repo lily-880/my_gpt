@@ -2,8 +2,10 @@
 # torch 请用 CPU 轮子（见 README）；不要写成无 index 的 pip install torch，
 # 否则会下一整套 CUDA，本机又用不上。
 transformers>=4.40
+regex>=2024.0
 datasets>=2.14
 matplotlib>=3.7
 pytest>=7.0
 tqdm
 numpy
+socksio

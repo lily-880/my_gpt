@@ -1,4 +1,4 @@
-"""Decoder-only GPT 的底层积木（Day 2）。整模型堆叠放到 Day 3。
+"""Decoder-only GPT：Day 2 积木 + Day 3 整模型。
 
 刻意不用 FlashAttention / GQA / QK-Norm，方便把公式写成看得见的矩阵乘法。
 """
@@ -136,11 +136,70 @@ class FeedForward(nn.Module):
         return self.dropout(self.c_proj(self.act(self.c_fc(x))))
 
 
+class TransformerBlock(nn.Module):
+    """Pre-Norm 残差块：先归一化再算注意力 / FFN，再加回原输入。"""
+
+    def __init__(self, config: GPTConfig):
+        super().__init__()
+        self.ln_1 = RMSNorm(config.n_embd)
+        self.attn = CausalSelfAttention(config)
+        self.ln_2 = RMSNorm(config.n_embd)
+        self.ffn = FeedForward(config)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = x + self.attn(self.ln_1(x))
+        x = x + self.ffn(self.ln_2(x))
+        return x
+
+
 class GPT(nn.Module):
+    """词嵌入 → N 层 TransformerBlock → 最终 RMSNorm → 词表上的 logits。"""
+
     def __init__(self, config: GPTConfig):
         super().__init__()
         self.config = config
-        raise NotImplementedError("Day 3：用 RMSNorm + Attention + FFN 堆叠 TransformerBlock")
+        self.wte = nn.Embedding(config.vocab_size, config.n_embd)
+        self.wpe = (
+            nn.Embedding(config.block_size, config.n_embd)
+            if config.pos_encoding == "learned"
+            else None
+        )
+        self.drop = nn.Dropout(config.dropout)
+        self.blocks = nn.ModuleList([TransformerBlock(config) for _ in range(config.n_layer)])
+        self.ln_f = RMSNorm(config.n_embd)
+        self.lm_head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
+        self.apply(self._init_weights)
+        for name, param in self.named_parameters():
+            if name.endswith("c_proj.weight"):
+                torch.nn.init.normal_(param, mean=0.0, std=0.02 / math.sqrt(2 * config.n_layer))
+
+    def _init_weights(self, module: nn.Module) -> None:
+        if isinstance(module, nn.Linear):
+            torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
+        elif isinstance(module, nn.Embedding):
+            torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
 
     def forward(self, idx: torch.Tensor, labels: torch.Tensor | None = None):
-        raise NotImplementedError("Day 3：返回 logits，可选交叉熵 loss")
+        _, t = idx.shape
+        if t > self.config.block_size:
+            raise ValueError(f"序列长度 {t} 超过 block_size={self.config.block_size}")
+
+        x = self.wte(idx)
+        if self.wpe is not None:
+            pos = torch.arange(t, device=idx.device)
+            x = x + self.wpe(pos)
+        x = self.drop(x)
+        for block in self.blocks:
+            x = block(x)
+        logits = self.lm_head(self.ln_f(x))
+
+        loss = None
+        if labels is not None:
+            # labels 与 idx 同形状：第 t 位的 label 是「下一个该出现的 token」。
+            # 填 -100 的位置不计入 loss（给以后 padding 用）。
+            loss = F.cross_entropy(
+                logits.view(-1, logits.size(-1)),
+                labels.view(-1),
+                ignore_index=-100,
+            )
+        return logits, loss

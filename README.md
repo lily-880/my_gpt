@@ -4,11 +4,11 @@
 
 实现程度会在文档里标成三类：**完整实现（小规模）** / **研究 Demo** / **只掌握原理**。
 
-## 当前进度（Day 1）
+## 当前进度（Day 6 完成；下一件是 Day 7 消融）
 
-- 目录、默认超参、本地依赖已就绪。
-- 核心代码仍是占位，调用会抛 `NotImplementedError`。
-- Day 2 开始写模型算子和单元测试。
+- Day 1–5：骨架、算子、整模型、数据、过拟合、`base_train.py`。
+- Day 6（2026-09-03）：本机 **RTX 4060 Laptop** 跑通默认约 70M：莎士比亚全集、2000 step、bf16、val PPL 273→76。报告：`assets/experiments/2026-09-03_local_shakespeare_full/`。计划已改为默认在 4060 上训，**不必为莎士比亚上云**。
+- Day 7 起：本机做三组消融；电商 CPT / 蒸馏也优先 4060。
 
 ## 默认超参
 
@@ -54,6 +54,46 @@ notes/                  # 术语表、实验笔记
 requirements.txt        # 本地
 requirements-gpu.txt    # 云上额外依赖
 ```
+
+## 数据怎么切（Day 4）
+
+预训练默认用**莎士比亚全集**（公有领域，约 38 部戏剧 + 十四行诗等），不是 Karpathy 那份 1.1MB 的 tiny-shakespeare。单篇在 `data/shakespeare_plays/`，拼好的长河是 `data/shakespeare_complete.txt`。`overfit_check.py` 仍用 tiny，方便 CPU 冒烟。
+
+切法：
+
+1. 用 GPT-2 tokenizer 把**全文**编成一条 token 长河。
+2. **按 token 下标**切开：前 90% 训练、后 10% 验证（不是按剧本幕/场切）。
+3. 再切成不重叠的窗口，长度 `block_size`。每条样本的 `y` 是 `x` 向右错开 1 位（猜下一个 token）。
+4. 窗口拼不齐的尾巴丢掉。
+
+这样验证集是文本的后 10%，和训练在时间上相邻，可能略有相似。莎士比亚全集大约是 tiny 的 5 倍，对 80M 模型仍偏小（Chinchilla 量级要十亿级 token）；再大就超出莎士比亚能提供的文本了。以后电商数据可以改成「按商品/按评论 ID 切」。
+
+指定其它文件：
+
+```bash
+python scripts/base_train.py --config configs/default.json --device cuda --data-file data/shakespeare_complete.txt
+```
+
+本机过拟合（确认 loss 能降，不必用完整 80M 模型）：
+
+```bash
+python scripts/overfit_check.py
+pytest -q tests/test_data_optim.py
+```
+
+本机训练冒烟（小模型，CPU）：
+
+```bash
+python scripts/base_train.py --config configs/cpu_smoke.json --device cpu
+```
+
+云上预训练（默认约 80M）：
+
+```bash
+python scripts/base_train.py --config configs/default.json --device cuda
+```
+
+AMP：有 GPU 且支持 bf16 时用 bf16、不用 GradScaler；更老的 GPU 用 fp16 + GradScaler；CPU 自动关掉 AMP。nanochat 的自定义 `COMPUTE_DTYPE` 不在 14 天范围。
 
 ## 和 nanochat 的关系
 
