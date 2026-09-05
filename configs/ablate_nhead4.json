@@ -1,6 +1,6 @@
 {
   "n_layer": 6,
-  "n_head": 8,
+  "n_head": 4,
   "n_embd": 512,
   "block_size": 256,
   "vocab_size": 50257,
@@ -13,10 +13,8 @@
   "grad_clip": 1.0,
   "log_every": 20,
   "eval_every": 100,
-  "save_every": 500,
+  "save_every": 0,
   "sample_every": 200,
   "max_new_tokens": 40,
-  "eval_batches": 20,
-  "split": "per_doc",
-  "split_seed": 42
+  "eval_batches": 20
 }

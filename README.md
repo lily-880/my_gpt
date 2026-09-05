@@ -4,11 +4,12 @@
 
 实现程度会在文档里标成三类：**完整实现（小规模）** / **研究 Demo** / **只掌握原理**。
 
-## 当前进度（Day 6 完成；下一件是 Day 7 消融）
+## 当前进度（莎士比亚收束；下一件是 Day 8 蒸馏）
 
 - Day 1–5：骨架、算子、整模型、数据、过拟合、`base_train.py`。
-- Day 6（2026-09-03）：本机 **RTX 4060 Laptop** 跑通默认约 70M：莎士比亚全集、2000 step、bf16、val PPL 273→76。报告：`assets/experiments/2026-09-03_local_shakespeare_full/`。计划已改为默认在 4060 上训，**不必为莎士比亚上云**。
-- Day 7 起：本机做三组消融；电商 CPT / 蒸馏也优先 4060。
+- Day 6–7：4060 上跑通约 70M 预训练，并完成 RoPE / 头数 / AMP / dropout 消融。
+- 2026-09-05：val 改为按篇随机窗口；采用 `checkpoints/shakespeare_perdoc/best.pt`（step 3200，该协议下 val PPL 34.5）。
+- 总报告：`assets/experiments/REPORT.md`。旧协议（长河尾巴）基线仍是 `checkpoints/ablate_baseline/last.pt`，PPL 77，两套数字不能比。
 
 ## 默认超参
 
@@ -59,14 +60,17 @@ requirements-gpu.txt    # 云上额外依赖
 
 预训练默认用**莎士比亚全集**（公有领域，约 38 部戏剧 + 十四行诗等），不是 Karpathy 那份 1.1MB 的 tiny-shakespeare。单篇在 `data/shakespeare_plays/`，拼好的长河是 `data/shakespeare_complete.txt`。`overfit_check.py` 仍用 tiny，方便 CPU 冒烟。
 
-切法：
+切法（默认 `split=per_doc`，`split_seed=42`）：
 
-1. 用 GPT-2 tokenizer 把**全文**编成一条 token 长河。
-2. **按 token 下标**切开：前 90% 训练、后 10% 验证（不是按剧本幕/场切）。
-3. 再切成不重叠的窗口，长度 `block_size`。每条样本的 `y` 是 `x` 向右错开 1 位（猜下一个 token）。
-4. 窗口拼不齐的尾巴丢掉。
+1. 按 `data/shakespeare_plays/` 里每一篇单独分词，不先拼成长河再切。
+2. **每篇**把不重叠窗口打乱，固定种子随机抽出约 10% 进验证，其余进训练。开头、中间、结尾都可能进 val，不是篇末一刀切。
+3. 不能按单个 token 随机抽：相邻 token 会漏进 train 和 val。抽的是整段 `block_size` 窗口。
+4. 验证窗口按篇轮转，所以 `eval_batches=20` 也会扫到多部作品。窗口不跨篇；挖洞后的片段不重新粘在一起。
+5. 太短、凑不够两个窗口的篇只进训练。
 
-这样验证集是文本的后 10%，和训练在时间上相邻，可能略有相似。莎士比亚全集大约是 tiny 的 5 倍，对 80M 模型仍偏小（Chinchilla 量级要十亿级 token）；再大就超出莎士比亚能提供的文本了。以后电商数据可以改成「按商品/按评论 ID 切」。
+旧实验（Day 6/7、shakespeare_best/v2）是整条长河后 10%（`token_tail`）。只要篇末 10% 用 `per_doc_tail`。新旧 PPL **不能直接比**。
+
+莎士比亚全集大约是 tiny 的 5 倍，对 80M 模型仍偏小。以后电商数据按商品/评论 ID 切，和这里的按篇切是同一类做法。
 
 指定其它文件：
 

@@ -15,8 +15,13 @@
   "eval_every": 100,
   "save_every": 500,
   "sample_every": 200,
-  "max_new_tokens": 40,
+  "max_new_tokens": 80,
   "eval_batches": 20,
+  "random_windows": false,
+  "sample_temperature": 0.8,
+  "sample_top_k": 50,
+  "patience": 4,
+  "min_eval_step": 600,
   "split": "per_doc",
   "split_seed": 42
 }

@@ -1,0 +1,294 @@
+device=cuda  amp=torch.bfloat16  scaler=False
+step 00001  train_loss=10.9027  train_ppl=54323.38
+step 00020  train_loss=6.7893  train_ppl=888.31
+step 00040  train_loss=6.0598  train_ppl=428.29
+step 00060  train_loss=6.0666  train_ppl=431.20
+step 00080  train_loss=5.4330  train_ppl=228.84
+step 00100  train_loss=5.0730  train_ppl=159.65
+step 00100  val_loss=5.7564  val_ppl=316.20
+step 00120  train_loss=5.3760  train_ppl=216.15
+step 00140  train_loss=5.4549  train_ppl=233.89
+step 00160  train_loss=4.7423  train_ppl=114.70
+step 00180  train_loss=5.2067  train_ppl=182.50
+step 00200  train_loss=4.7431  train_ppl=114.79
+step 00200  val_loss=5.3363  val_ppl=207.75
+sample: ROMEO: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+step 00220  train_loss=4.8190  train_ppl=123.84
+step 00240  train_loss=4.6121  train_ppl=100.69
+step 00260  train_loss=4.7742  train_ppl=118.41
+step 00280  train_loss=4.5599  train_ppl=95.58
+step 00300  train_loss=4.8273  train_ppl=124.88
+step 00300  val_loss=5.1412  val_ppl=170.92
+step 00320  train_loss=4.7104  train_ppl=111.09
+step 00340  train_loss=4.8546  train_ppl=128.33
+step 00360  train_loss=4.7284  train_ppl=113.12
+step 00380  train_loss=4.6115  train_ppl=100.63
+step 00400  train_loss=4.7152  train_ppl=111.63
+step 00400  val_loss=5.0407  val_ppl=154.58
+sample: ROMEO: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+step 00420  train_loss=4.7862  train_ppl=119.85
+step 00440  train_loss=4.7309  train_ppl=113.40
+step 00460  train_loss=4.7372  train_ppl=114.12
+step 00480  train_loss=4.2808  train_ppl=72.30
+step 00500  train_loss=4.3242  train_ppl=75.51
+step 00500  val_loss=5.0027  val_ppl=148.81
+step 00520  train_loss=4.1478  train_ppl=63.30
+step 00540  train_loss=4.4335  train_ppl=84.23
+step 00560  train_loss=4.3638  train_ppl=78.56
+step 00580  train_loss=4.5395  train_ppl=93.65
+step 00600  train_loss=4.5657  train_ppl=96.13
+step 00600  val_loss=4.9256  val_ppl=137.78
+sample: ROMEO: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+step 00620  train_loss=3.8336  train_ppl=46.23
+step 00640  train_loss=4.3330  train_ppl=76.18
+step 00660  train_loss=4.2655  train_ppl=71.20
+step 00680  train_loss=4.4711  train_ppl=87.45
+step 00700  train_loss=4.5410  train_ppl=93.78
+step 00700  val_loss=4.8912  val_ppl=133.11
+step 00720  train_loss=4.1271  train_ppl=62.00
+step 00740  train_loss=4.0160  train_ppl=55.48
+step 00760  train_loss=4.4471  train_ppl=85.38
+step 00780  train_loss=4.4796  train_ppl=88.20
+step 00800  train_loss=4.4214  train_ppl=83.21
+step 00800  val_loss=4.8237  val_ppl=124.42
+sample: ROMEO: 
+And in the other. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+step 00820  train_loss=4.1215  train_ppl=61.65
+step 00840  train_loss=4.4585  train_ppl=86.36
+step 00860  train_loss=4.1170  train_ppl=61.37
+step 00880  train_loss=4.0667  train_ppl=58.37
+step 00900  train_loss=4.0262  train_ppl=56.05
+step 00900  val_loss=4.7265  val_ppl=112.90
+step 00920  train_loss=4.0676  train_ppl=58.42
+step 00940  train_loss=4.1290  train_ppl=62.11
+step 00960  train_loss=4.1790  train_ppl=65.30
+step 00980  train_loss=4.0518  train_ppl=57.50
+step 01000  train_loss=3.9473  train_ppl=51.79
+step 01000  val_loss=4.7230  val_ppl=112.51
+sample: ROMEO: 
+ 
+I have a man’d, 
+And I’d, 
+And I have been a man’d, 
+And I’d,
+step 01020  train_loss=4.3468  train_ppl=77.23
+step 01040  train_loss=3.7398  train_ppl=42.09
+step 01060  train_loss=3.9175  train_ppl=50.28
+step 01080  train_loss=3.7421  train_ppl=42.19
+step 01100  train_loss=3.9785  train_ppl=53.43
+step 01100  val_loss=4.6815  val_ppl=107.93
+step 01120  train_loss=4.2024  train_ppl=66.84
+step 01140  train_loss=3.9972  train_ppl=54.44
+step 01160  train_loss=4.0515  train_ppl=57.48
+step 01180  train_loss=3.8263  train_ppl=45.89
+step 01200  train_loss=3.7795  train_ppl=43.79
+step 01200  val_loss=4.6843  val_ppl=108.24
+sample: ROMEO: 
+And I have a good to be a good 
+And I have seen a man. 
+ 
+CASSIO. 
+I am a good sir. 
+ 
+
+step 01220  train_loss=4.2774  train_ppl=72.05
+step 01240  train_loss=3.9514  train_ppl=52.01
+step 01260  train_loss=4.0779  train_ppl=59.02
+step 01280  train_loss=4.0198  train_ppl=55.69
+step 01300  train_loss=4.3283  train_ppl=75.81
+step 01300  val_loss=4.6471  val_ppl=104.28
+step 01320  train_loss=3.8954  train_ppl=49.18
+step 01340  train_loss=3.9876  train_ppl=53.93
+step 01360  train_loss=3.8878  train_ppl=48.80
+step 01380  train_loss=3.7356  train_ppl=41.91
+step 01400  train_loss=3.9523  train_ppl=52.05
+step 01400  val_loss=4.6280  val_ppl=102.31
+sample: ROMEO: 
+O, I am I am not to be. 
+ 
+BAPTISTA. 
+O, sir, sir, sir, sir, 
+And you, sir
+step 01420  train_loss=3.8495  train_ppl=46.97
+step 01440  train_loss=3.7313  train_ppl=41.73
+step 01460  train_loss=3.6102  train_ppl=36.97
+step 01480  train_loss=3.7701  train_ppl=43.38
+step 01500  train_loss=3.9065  train_ppl=49.72
+step 01500  val_loss=4.6100  val_ppl=100.48
+step 01520  train_loss=4.0014  train_ppl=54.68
+step 01540  train_loss=3.5382  train_ppl=34.41
+step 01560  train_loss=3.6541  train_ppl=38.63
+step 01580  train_loss=3.7739  train_ppl=43.55
+step 01600  train_loss=3.9431  train_ppl=51.58
+step 01600  val_loss=4.5518  val_ppl=94.81
+sample: ROMEO:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+step 01620  train_loss=3.8423  train_ppl=46.63
+step 01640  train_loss=3.8453  train_ppl=46.77
+step 01660  train_loss=3.9140  train_ppl=50.10
+step 01680  train_loss=3.6870  train_ppl=39.93
+step 01700  train_loss=3.7295  train_ppl=41.66
+step 01700  val_loss=4.5653  val_ppl=96.09
+step 01720  train_loss=4.2146  train_ppl=67.67
+step 01740  train_loss=3.9695  train_ppl=52.96
+step 01760  train_loss=3.6288  train_ppl=37.67
+step 01780  train_loss=3.8813  train_ppl=48.49
+step 01800  train_loss=3.5161  train_ppl=33.65
+step 01800  val_loss=4.5196  val_ppl=91.80
+sample: ROMEO: 
+And I am not so, and I am not to be not so. 
+ 
+PETRUCHIO. 
+I am not so. 
+ 
+PETR
+step 01820  train_loss=3.8400  train_ppl=46.52
+step 01840  train_loss=3.6130  train_ppl=37.08
+step 01860  train_loss=3.3710  train_ppl=29.11
+step 01880  train_loss=3.9931  train_ppl=54.22
+step 01900  train_loss=3.7247  train_ppl=41.46
+step 01900  val_loss=4.5073  val_ppl=90.67
+step 01920  train_loss=4.0227  train_ppl=55.85
+step 01940  train_loss=3.5250  train_ppl=33.95
+step 01960  train_loss=3.6161  train_ppl=37.19
+step 01980  train_loss=3.8419  train_ppl=46.61
+step 02000  train_loss=3.7619  train_ppl=43.03
+step 02000  val_loss=4.4918  val_ppl=89.28
+sample: ROMEO: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+wall=162.9s  steps=2000  step/s=12.28
+peak_mem_MiB=2511.0

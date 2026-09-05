@@ -1,0 +1,210 @@
+device=cuda  amp=torch.bfloat16  scaler=False
+step 00001  train_loss=10.8623  train_ppl=52172.18
+step 00020  train_loss=6.5341  train_ppl=688.23
+step 00040  train_loss=5.7507  train_ppl=314.42
+step 00060  train_loss=5.7005  train_ppl=299.00
+step 00080  train_loss=5.3051  train_ppl=201.37
+step 00100  train_loss=5.1834  train_ppl=178.30
+step 00100  val_loss=5.5653  val_ppl=261.21
+step 00120  train_loss=5.3430  train_ppl=209.13
+step 00140  train_loss=5.1258  train_ppl=168.30
+step 00160  train_loss=4.7506  train_ppl=115.65
+step 00180  train_loss=4.8434  train_ppl=126.90
+step 00200  train_loss=4.6585  train_ppl=105.47
+step 00200  val_loss=5.1297  val_ppl=168.96
+sample: ROMEO: 
+ And, and the world, and the world, 
+ And, and the world, and the world, 
+ And, and the world, and the world 
+ And, and
+step 00220  train_loss=4.6927  train_ppl=109.15
+step 00240  train_loss=4.9614  train_ppl=142.80
+step 00260  train_loss=4.0451  train_ppl=57.12
+step 00280  train_loss=4.3771  train_ppl=79.61
+step 00300  train_loss=4.1337  train_ppl=62.41
+step 00300  val_loss=4.9011  val_ppl=134.43
+step 00320  train_loss=4.6155  train_ppl=101.04
+step 00340  train_loss=4.4832  train_ppl=88.52
+step 00360  train_loss=4.1656  train_ppl=64.43
+step 00380  train_loss=4.3233  train_ppl=75.43
+step 00400  train_loss=4.6718  train_ppl=106.89
+step 00400  val_loss=4.8188  val_ppl=123.81
+sample: ROMEO: 
+I’ll be a man’s life. 
+ 
+HORATIO. 
+I’ll be a good. 
+ 
+HORAT
+step 00420  train_loss=4.3619  train_ppl=78.40
+step 00440  train_loss=4.1346  train_ppl=62.46
+step 00460  train_loss=4.2147  train_ppl=67.67
+step 00480  train_loss=4.2399  train_ppl=69.40
+step 00500  train_loss=3.8617  train_ppl=47.55
+step 00500  val_loss=4.7342  val_ppl=113.78
+step 00520  train_loss=4.3079  train_ppl=74.29
+step 00540  train_loss=4.5593  train_ppl=95.52
+step 00560  train_loss=4.1113  train_ppl=61.03
+step 00580  train_loss=3.8736  train_ppl=48.12
+step 00600  train_loss=4.1100  train_ppl=60.95
+step 00600  val_loss=4.6647  val_ppl=106.14
+sample: ROMEO: 
+And I am I’ll be so. 
+ 
+ [_Exit._] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+step 00620  train_loss=4.0028  train_ppl=54.75
+step 00640  train_loss=4.3772  train_ppl=79.62
+step 00660  train_loss=3.9789  train_ppl=53.46
+step 00680  train_loss=4.1492  train_ppl=63.39
+step 00700  train_loss=4.1504  train_ppl=63.46
+step 00700  val_loss=4.6417  val_ppl=103.72
+step 00720  train_loss=4.2024  train_ppl=66.85
+step 00740  train_loss=3.9942  train_ppl=54.28
+step 00760  train_loss=3.7464  train_ppl=42.37
+step 00780  train_loss=4.1260  train_ppl=61.93
+step 00800  train_loss=4.1524  train_ppl=63.59
+step 00800  val_loss=4.5756  val_ppl=97.09
+sample: ROMEO:
+And I’ll tell thee, I’ll tell thee.
+
+IAGO.
+I’ll tell thee, I’ll tell thee.
+
+IAGO
+step 00820  train_loss=3.9802  train_ppl=53.53
+step 00840  train_loss=3.9331  train_ppl=51.06
+step 00860  train_loss=3.9898  train_ppl=54.05
+step 00880  train_loss=3.5951  train_ppl=36.42
+step 00900  train_loss=3.6835  train_ppl=39.78
+step 00900  val_loss=4.5583  val_ppl=95.42
+step 00920  train_loss=3.9207  train_ppl=50.44
+step 00940  train_loss=3.9772  train_ppl=53.37
+step 00960  train_loss=4.0370  train_ppl=56.66
+step 00980  train_loss=3.8433  train_ppl=46.68
+step 01000  train_loss=4.1816  train_ppl=65.47
+step 01000  val_loss=4.5194  val_ppl=91.78
+sample: ROMEO: 
+And I’ll be a thousand of a thousand of a man. 
+ 
+CY. 
+I’ll be a good man. 
+ 
+C
+step 01020  train_loss=3.9304  train_ppl=50.93
+step 01040  train_loss=3.9519  train_ppl=52.04
+step 01060  train_loss=4.2184  train_ppl=67.93
+step 01080  train_loss=3.6553  train_ppl=38.68
+step 01100  train_loss=3.8003  train_ppl=44.71
+step 01100  val_loss=4.4923  val_ppl=89.33
+step 01120  train_loss=4.1101  train_ppl=60.95
+step 01140  train_loss=3.8124  train_ppl=45.26
+step 01160  train_loss=4.0786  train_ppl=59.06
+step 01180  train_loss=3.7888  train_ppl=44.20
+step 01200  train_loss=3.8858  train_ppl=48.70
+step 01200  val_loss=4.5020  val_ppl=90.19
+sample: ROMEO: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+step 01220  train_loss=3.6905  train_ppl=40.07
+step 01240  train_loss=3.8866  train_ppl=48.75
+step 01260  train_loss=3.7960  train_ppl=44.52
+step 01280  train_loss=3.9513  train_ppl=52.00
+step 01300  train_loss=3.6322  train_ppl=37.80
+step 01300  val_loss=4.4561  val_ppl=86.15
+step 01320  train_loss=4.0667  train_ppl=58.37
+step 01340  train_loss=3.6014  train_ppl=36.65
+step 01360  train_loss=3.7340  train_ppl=41.85
+step 01380  train_loss=3.9159  train_ppl=50.19
+step 01400  train_loss=3.7575  train_ppl=42.84
+step 01400  val_loss=4.4388  val_ppl=84.67
+sample: ROMEO: 
+And, my love, and my love, 
+And so I have no more, but I’ll be. 
+ 
+ROMEO. 
+O, my lord
+step 01420  train_loss=3.7367  train_ppl=41.96
+step 01440  train_loss=3.4684  train_ppl=32.08
+step 01460  train_loss=3.6853  train_ppl=39.86
+step 01480  train_loss=3.7628  train_ppl=43.07
+step 01500  train_loss=3.9941  train_ppl=54.28
+step 01500  val_loss=4.4273  val_ppl=83.70
+step 01520  train_loss=3.7097  train_ppl=40.84
+step 01540  train_loss=3.8341  train_ppl=46.25
+step 01560  train_loss=3.7234  train_ppl=41.41
+step 01580  train_loss=3.4386  train_ppl=31.14
+step 01600  train_loss=3.6819  train_ppl=39.72
+step 01600  val_loss=4.4396  val_ppl=84.74
+sample: ROMEO: 
+I’ll be my love, and I’ll be my love. 
+ 
+ [_Exit._] 
+ 
+ Enter the King, Lady Macbeth
+step 01620  train_loss=3.5308  train_ppl=34.15
+step 01640  train_loss=3.3997  train_ppl=29.95
+step 01660  train_loss=3.8331  train_ppl=46.21
+step 01680  train_loss=3.5959  train_ppl=36.45
+step 01700  train_loss=3.5398  train_ppl=34.46
+step 01700  val_loss=4.4168  val_ppl=82.83
+step 01720  train_loss=3.9060  train_ppl=49.70
+step 01740  train_loss=3.4634  train_ppl=31.92
+step 01760  train_loss=3.5275  train_ppl=34.04
+step 01780  train_loss=3.5475  train_ppl=34.72
+step 01800  train_loss=3.6765  train_ppl=39.51
+step 01800  val_loss=4.3905  val_ppl=80.68
+sample: ROMEO: 
+And I am sure I am a gentleman. 
+ 
+ [_Exeunt._] 
+ 
+SCENE II. The same. 
+ 
+ Enter Antony
+step 01820  train_loss=3.6925  train_ppl=40.14
+step 01840  train_loss=3.7241  train_ppl=41.43
+step 01860  train_loss=3.2113  train_ppl=24.81
+step 01880  train_loss=3.5638  train_ppl=35.30
+step 01900  train_loss=3.6509  train_ppl=38.51
+step 01900  val_loss=4.3627  val_ppl=78.47
+step 01920  train_loss=3.7384  train_ppl=42.03
+step 01940  train_loss=3.6036  train_ppl=36.73
+step 01960  train_loss=3.4899  train_ppl=32.78
+step 01980  train_loss=3.6257  train_ppl=37.55
+step 02000  train_loss=3.4057  train_ppl=30.14
+step 02000  val_loss=4.3514  val_ppl=77.59
+sample: ROMEO: 
+I will be my love, and I will be my love. 
+ 
+ROMEO. 
+I will be my love, and I will be my love. 
+ 
+wall=179.8s  steps=2000  step/s=11.12
+peak_mem_MiB=2542.6

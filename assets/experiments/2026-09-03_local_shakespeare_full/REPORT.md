@@ -46,7 +46,7 @@
 | 代码 | `scripts/base_train.py` |
 | 配置快照 | 同目录 `config.json`（与当时 `configs/default.json` 一致） |
 | 数据 | `data/shakespeare_complete.txt`（43 篇公有领域文本拼成） |
-| Checkpoint | `checkpoints/shakespeare_full/`（gitignore，不进仓库） |
+| Checkpoint | 当时的 `shakespeare_full/` 已删；现用 `checkpoints/shakespeare_perdoc/best.pt` |
 
 命令：
 

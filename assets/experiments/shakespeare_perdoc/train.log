@@ -1,0 +1,446 @@
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+device=cuda  amp=torch.bfloat16  scaler=False
+step 00001  train_loss=10.8308  train_ppl=50556.21  lr=3.00e-04
+step 00020  train_loss=6.4457  train_ppl=629.96  lr=3.00e-04
+step 00040  train_loss=6.0499  train_ppl=424.08  lr=3.00e-04
+step 00060  train_loss=5.8242  train_ppl=338.38  lr=3.00e-04
+step 00080  train_loss=5.7387  train_ppl=310.65  lr=3.00e-04
+step 00100  train_loss=5.4238  train_ppl=226.73  lr=3.00e-04
+step 00100  val_loss=5.2426  val_ppl=189.17
+saved best.pt  val_loss=5.2426  step=100
+step 00120  train_loss=5.3226  train_ppl=204.92  lr=3.00e-04
+step 00140  train_loss=5.5293  train_ppl=251.97  lr=3.00e-04
+step 00160  train_loss=4.8045  train_ppl=122.05  lr=3.00e-04
+step 00180  train_loss=4.8717  train_ppl=130.54  lr=3.00e-04
+step 00200  train_loss=4.7060  train_ppl=110.61  lr=3.00e-04
+step 00200  val_loss=4.7270  val_ppl=112.96
+saved best.pt  val_loss=4.7270  step=200
+sample: ROMEO: I I, I say not. 
+ 
+OTHE. 
+If thou, my master and, so, I say.— 
+ 
+KING. 
+IUS. 
+O, a noble, I do; and that you, 
+’s a man. 
+ 
+He, my lord, and you are, for my lord. 
+step 00220  train_loss=4.5016  train_ppl=90.16  lr=3.00e-04
+step 00240  train_loss=4.5623  train_ppl=95.81  lr=3.00e-04
+step 00260  train_loss=4.7556  train_ppl=116.24  lr=3.00e-04
+step 00280  train_loss=4.0876  train_ppl=59.59  lr=3.00e-04
+step 00300  train_loss=4.4703  train_ppl=87.38  lr=3.00e-04
+step 00300  val_loss=4.4621  val_ppl=86.67
+saved best.pt  val_loss=4.4621  step=300
+step 00320  train_loss=4.3526  train_ppl=77.68  lr=3.00e-04
+step 00340  train_loss=4.7531  train_ppl=115.94  lr=3.00e-04
+step 00360  train_loss=4.1221  train_ppl=61.69  lr=3.00e-04
+step 00380  train_loss=4.5007  train_ppl=90.08  lr=3.00e-04
+step 00400  train_loss=4.4544  train_ppl=86.00  lr=3.00e-04
+step 00400  val_loss=4.3158  val_ppl=74.88
+saved best.pt  val_loss=4.3158  step=400
+sample: ROMEO:
+SIR TOBY. What’d, a traitor: and yet not not
+’s a good, and in the earth,
+I’ll follow it with the sun
+If they are not; and I know, being gone;
+I will not a slave to his house.
+
+KING HEN.
+It is the very king of a true.
+
+step 00420  train_loss=4.4295  train_ppl=83.89  lr=3.00e-04
+step 00440  train_loss=4.2386  train_ppl=69.31  lr=3.00e-04
+step 00460  train_loss=4.0484  train_ppl=57.31  lr=3.00e-04
+step 00480  train_loss=4.1193  train_ppl=61.51  lr=3.00e-04
+step 00500  train_loss=3.8160  train_ppl=45.42  lr=3.00e-04
+step 00500  val_loss=4.2117  val_ppl=67.47
+saved best.pt  val_loss=4.2117  step=500
+step 00520  train_loss=3.9067  train_ppl=49.74  lr=3.00e-04
+step 00540  train_loss=3.8448  train_ppl=46.75  lr=3.00e-04
+step 00560  train_loss=4.3212  train_ppl=75.28  lr=3.00e-04
+step 00580  train_loss=4.2265  train_ppl=68.48  lr=3.00e-04
+step 00600  train_loss=4.3686  train_ppl=78.93  lr=3.00e-04
+step 00600  val_loss=4.1013  val_ppl=60.42
+saved best.pt  val_loss=4.1013  step=600
+sample: ROMEO: 
+I have heard me a great word to go. 
+ 
+LADYORK. 
+O, what I have done? 
+ 
+TRANIO. 
+HORTMeth. 
+Why, I have a king’s house. 
+ 
+IMOGEN. 
+’Tis, a man, but I think thou
+step 00620  train_loss=3.9300  train_ppl=50.91  lr=3.00e-04
+step 00640  train_loss=3.7485  train_ppl=42.46  lr=3.00e-04
+step 00660  train_loss=4.0456  train_ppl=57.15  lr=3.00e-04
+step 00680  train_loss=4.1176  train_ppl=61.41  lr=3.00e-04
+step 00700  train_loss=4.4283  train_ppl=83.79  lr=3.00e-04
+step 00700  val_loss=4.0405  val_ppl=56.86
+saved best.pt  val_loss=4.0405  step=700
+step 00720  train_loss=4.4099  train_ppl=82.26  lr=3.00e-04
+step 00740  train_loss=3.8226  train_ppl=45.72  lr=3.00e-04
+step 00760  train_loss=3.8625  train_ppl=47.58  lr=3.00e-04
+step 00780  train_loss=3.8494  train_ppl=46.97  lr=3.00e-04
+step 00800  train_loss=3.5976  train_ppl=36.51  lr=3.00e-04
+step 00800  val_loss=3.9898  val_ppl=54.05
+saved best.pt  val_loss=3.9898  step=800
+sample: ROMEO: 
+Who didst thou leave me, that never wouldst 
+That you did not be, that had been to make me my blood. 
+ 
+CASSIUS. 
+It was my conscience or to do it, 
+And he did read it; and, but not yet 
+I will do you out of love, that’s a fault.
+step 00820  train_loss=3.6230  train_ppl=37.45  lr=3.00e-04
+step 00840  train_loss=3.9276  train_ppl=50.79  lr=3.00e-04
+step 00860  train_loss=4.2646  train_ppl=71.14  lr=3.00e-04
+step 00880  train_loss=4.1761  train_ppl=65.11  lr=3.00e-04
+step 00900  train_loss=3.9293  train_ppl=50.87  lr=3.00e-04
+step 00900  val_loss=3.9525  val_ppl=52.07
+saved best.pt  val_loss=3.9525  step=900
+step 00920  train_loss=3.8778  train_ppl=48.32  lr=3.00e-04
+step 00940  train_loss=3.9465  train_ppl=51.76  lr=3.00e-04
+step 00960  train_loss=3.4896  train_ppl=32.77  lr=3.00e-04
+step 00980  train_loss=3.6198  train_ppl=37.33  lr=3.00e-04
+step 01000  train_loss=3.9567  train_ppl=52.28  lr=3.00e-04
+step 01000  val_loss=3.8923  val_ppl=49.02
+saved best.pt  val_loss=3.8923  step=1000
+sample: ROMEO: 
+ I have thee a friend, thou shalt say to this. 
+ 
+KING HENRY. 
+I am very man, he must not be a fellow of the matter. 
+ 
+ Enter POMPEY 
+ 
+ LUCIO OF FRANCE. Come, tell thee, know how now, I have a good fellow? 
+ 
+POL
+step 01020  train_loss=4.1287  train_ppl=62.10  lr=3.00e-04
+step 01040  train_loss=3.4817  train_ppl=32.51  lr=3.00e-04
+step 01060  train_loss=4.1317  train_ppl=62.28  lr=3.00e-04
+step 01080  train_loss=3.8323  train_ppl=46.17  lr=3.00e-04
+step 01100  train_loss=4.3579  train_ppl=78.09  lr=3.00e-04
+step 01100  val_loss=3.8683  val_ppl=47.86
+saved best.pt  val_loss=3.8683  step=1100
+step 01120  train_loss=3.8956  train_ppl=49.19  lr=3.00e-04
+step 01140  train_loss=3.5856  train_ppl=36.08  lr=3.00e-04
+step 01160  train_loss=3.7104  train_ppl=40.87  lr=3.00e-04
+step 01180  train_loss=3.3657  train_ppl=28.95  lr=3.00e-04
+step 01200  train_loss=3.7628  train_ppl=43.07  lr=3.00e-04
+step 01200  val_loss=3.8293  val_ppl=46.03
+saved best.pt  val_loss=3.8293  step=1200
+sample: ROMEO: for it was, 
+Thou shalt be well a woman. I am a king
+That he shall be a woman’d? 
+ 
+DUCHESS. 
+I would not meet you I know for you. It 
+I could not give this man and the good man 
+That I gave me in the devil, 
+That I shall bear thee
+step 01220  train_loss=3.6330  train_ppl=37.83  lr=3.00e-04
+step 01240  train_loss=3.6154  train_ppl=37.17  lr=3.00e-04
+step 01260  train_loss=3.5818  train_ppl=35.94  lr=3.00e-04
+step 01280  train_loss=3.8243  train_ppl=45.80  lr=3.00e-04
+step 01300  train_loss=3.8677  train_ppl=47.83  lr=3.00e-04
+step 01300  val_loss=3.8088  val_ppl=45.10
+saved best.pt  val_loss=3.8088  step=1300
+step 01320  train_loss=3.6989  train_ppl=40.40  lr=3.00e-04
+step 01340  train_loss=3.8702  train_ppl=47.95  lr=3.00e-04
+step 01360  train_loss=3.5765  train_ppl=35.75  lr=3.00e-04
+step 01380  train_loss=3.7044  train_ppl=40.62  lr=3.00e-04
+step 01400  train_loss=3.8771  train_ppl=48.29  lr=3.00e-04
+step 01400  val_loss=3.7664  val_ppl=43.22
+saved best.pt  val_loss=3.7664  step=1400
+sample: ROMEO: and wilt thou die? 
+ 
+ [_K_] 
+The thing, thou art so ill 
+That thou art a man’s daughter? 
+ 
+OSWALD. 
+My mother, God, I will not be married to speak 
+Than thou havest thy heart; or I never heard thee 
+In my fortunes from thy
+step 01420  train_loss=3.6721  train_ppl=39.33  lr=3.00e-04
+step 01440  train_loss=3.8227  train_ppl=45.73  lr=3.00e-04
+step 01460  train_loss=3.6182  train_ppl=37.27  lr=3.00e-04
+step 01480  train_loss=3.5674  train_ppl=35.43  lr=3.00e-04
+step 01500  train_loss=3.6225  train_ppl=37.43  lr=3.00e-04
+step 01500  val_loss=3.7568  val_ppl=42.81
+saved best.pt  val_loss=3.7568  step=1500
+step 01520  train_loss=3.7215  train_ppl=41.33  lr=3.00e-04
+step 01540  train_loss=3.3231  train_ppl=27.75  lr=3.00e-04
+step 01560  train_loss=3.4850  train_ppl=32.62  lr=3.00e-04
+step 01580  train_loss=3.6532  train_ppl=38.60  lr=3.00e-04
+step 01600  train_loss=3.6992  train_ppl=40.41  lr=3.00e-04
+step 01600  val_loss=3.7411  val_ppl=42.15
+saved best.pt  val_loss=3.7411  step=1600
+sample: ROMEO: 
+Hath rather now the deed thou shalt be my wife, 
+To the house of mine oaths shall make thee, 
+And I do beseech thy hand, 
+Thou shalt be such a man of mine honour, 
+For it will be a beggar’d up my grave to be. 
+Let me forswear me, when I
+step 01620  train_loss=3.6656  train_ppl=39.08  lr=3.00e-04
+step 01640  train_loss=3.4379  train_ppl=31.12  lr=3.00e-04
+step 01660  train_loss=3.4424  train_ppl=31.26  lr=3.00e-04
+step 01680  train_loss=3.7300  train_ppl=41.68  lr=3.00e-04
+step 01700  train_loss=3.9718  train_ppl=53.08  lr=3.00e-04
+step 01700  val_loss=3.7109  val_ppl=40.89
+saved best.pt  val_loss=3.7109  step=1700
+step 01720  train_loss=3.6722  train_ppl=39.34  lr=3.00e-04
+step 01740  train_loss=3.4870  train_ppl=32.69  lr=3.00e-04
+step 01760  train_loss=3.4254  train_ppl=30.73  lr=3.00e-04
+step 01780  train_loss=3.5656  train_ppl=35.36  lr=3.00e-04
+step 01800  train_loss=3.4030  train_ppl=30.06  lr=3.00e-04
+step 01800  val_loss=3.7014  val_ppl=40.50
+saved best.pt  val_loss=3.7014  step=1800
+sample: ROMEO: 
+ I’ll meet again, 
+And make it leave to me. 
+ 
+ROMEO. 
+O, farewell! 
+ 
+JULIET. 
+Taste thee from thy love. 
+ 
+JESSICA. 
+I have no man’s death. I can speak 
+To give my heart in my own
+step 01820  train_loss=3.8300  train_ppl=46.06  lr=3.00e-04
+step 01840  train_loss=3.3559  train_ppl=28.67  lr=3.00e-04
+step 01860  train_loss=3.6901  train_ppl=40.05  lr=3.00e-04
+step 01880  train_loss=3.4010  train_ppl=29.99  lr=3.00e-04
+step 01900  train_loss=3.9956  train_ppl=54.36  lr=3.00e-04
+step 01900  val_loss=3.6823  val_ppl=39.74
+saved best.pt  val_loss=3.6823  step=1900
+step 01920  train_loss=3.9028  train_ppl=49.54  lr=3.00e-04
+step 01940  train_loss=3.6412  train_ppl=38.14  lr=3.00e-04
+step 01960  train_loss=3.3020  train_ppl=27.17  lr=3.00e-04
+step 01980  train_loss=3.0783  train_ppl=21.72  lr=3.00e-04
+step 02000  train_loss=3.2436  train_ppl=25.63  lr=3.00e-04
+step 02000  val_loss=3.6655  val_ppl=39.07
+saved best.pt  val_loss=3.6655  step=2000
+sample: ROMEO: for, for ever fear, will thou stay thy daughter? 
+ 
+JULIET. 
+Thou didst have thy love, dost thou that thou gilt have no more 
+ nor thou, nor I love thee. 
+ 
+ROMEO and I will, be sure, I am glad to say 
+Thou hast made a fool to be thy
+wall=222.1s  steps=2000  step/s=9.01
+peak_mem_MiB=2511.1
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+resume checkpoints/shakespeare_perdoc/last.pt  from_step=2000
+device=cuda  amp=torch.bfloat16  scaler=False
+step 02020  train_loss=3.3059  train_ppl=27.27  lr=3.00e-04
+step 02040  train_loss=2.9771  train_ppl=19.63  lr=3.00e-04
+step 02060  train_loss=3.6329  train_ppl=37.82  lr=3.00e-04
+step 02080  train_loss=3.3114  train_ppl=27.42  lr=3.00e-04
+step 02100  train_loss=2.9754  train_ppl=19.60  lr=3.00e-04
+step 02100  val_loss=3.6421  val_ppl=38.17
+saved best.pt  val_loss=3.6421  step=2100
+step 02120  train_loss=2.8643  train_ppl=17.54  lr=3.00e-04
+step 02140  train_loss=3.6242  train_ppl=37.50  lr=3.00e-04
+step 02160  train_loss=3.2418  train_ppl=25.58  lr=3.00e-04
+step 02180  train_loss=3.1629  train_ppl=23.64  lr=3.00e-04
+step 02200  train_loss=3.4552  train_ppl=31.66  lr=3.00e-04
+step 02200  val_loss=3.6371  val_ppl=37.98
+saved best.pt  val_loss=3.6371  step=2200
+sample: ROMEO: 
+And now so, fair uncle with her fair care, 
+To all the world of love-in-hearted love, 
+I hope, in love, like her love to the world, 
+And love her love, of the love, and love, 
+ To her love, for all love in love, 
+ And love, by mine ear, and bid her
+step 02220  train_loss=3.4046  train_ppl=30.10  lr=3.00e-04
+step 02240  train_loss=3.3066  train_ppl=27.29  lr=3.00e-04
+step 02260  train_loss=3.2260  train_ppl=25.18  lr=3.00e-04
+step 02280  train_loss=3.5236  train_ppl=33.90  lr=3.00e-04
+step 02300  train_loss=3.5546  train_ppl=34.97  lr=3.00e-04
+step 02300  val_loss=3.6159  val_ppl=37.19
+saved best.pt  val_loss=3.6159  step=2300
+step 02320  train_loss=3.1034  train_ppl=22.27  lr=3.00e-04
+step 02340  train_loss=3.3621  train_ppl=28.85  lr=3.00e-04
+step 02360  train_loss=3.3397  train_ppl=28.21  lr=3.00e-04
+step 02380  train_loss=3.3852  train_ppl=29.52  lr=3.00e-04
+step 02400  train_loss=3.4131  train_ppl=30.36  lr=3.00e-04
+step 02400  val_loss=3.6066  val_ppl=36.84
+saved best.pt  val_loss=3.6066  step=2400
+sample: ROMEO:
+And why, Cassio, then I see:
+The rest I give thee.
+
+IAGO.
+O sweet dear,
+Yet take my sword to my kingdom.
+
+LODOVICO.
+Myself was false at thy chamber, thy lips on them.
+If thou art so, it shall be thyself
+To be the world to do thee wrong.—Good night
+wall=53.2s  steps=400  step/s=7.52
+peak_mem_MiB=2778.5
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+resume checkpoints/shakespeare_perdoc/last.pt  from_step=2400
+device=cuda  amp=torch.bfloat16  scaler=False
+step 02420  train_loss=3.1196  train_ppl=22.64  lr=3.00e-04
+step 02440  train_loss=3.4114  train_ppl=30.31  lr=3.00e-04
+step 02460  train_loss=3.1381  train_ppl=23.06  lr=3.00e-04
+step 02480  train_loss=3.2958  train_ppl=27.00  lr=3.00e-04
+step 02500  train_loss=3.3477  train_ppl=28.44  lr=3.00e-04
+step 02500  val_loss=3.6097  val_ppl=36.96
+no improve  bad_evals=1/4
+step 02520  train_loss=3.4137  train_ppl=30.38  lr=3.00e-04
+step 02540  train_loss=3.5135  train_ppl=33.57  lr=3.00e-04
+step 02560  train_loss=3.1298  train_ppl=22.87  lr=3.00e-04
+step 02580  train_loss=3.0425  train_ppl=20.96  lr=3.00e-04
+step 02600  train_loss=3.5275  train_ppl=34.04  lr=3.00e-04
+step 02600  val_loss=3.6070  val_ppl=36.86
+no improve  bad_evals=2/4
+sample: ROMEO: then, she love. 
+ 
+ 
+ROMEO. 
+I did, that love I did; and so will I; 
+I’ll not bid you see the truth, yet, I say, 
+This love’s love. 
+ 
+ROMEO. 
+That she she had. 
+ 
+MERCHAS. 
+
+step 02620  train_loss=3.3243  train_ppl=27.78  lr=3.00e-04
+step 02640  train_loss=3.0200  train_ppl=20.49  lr=3.00e-04
+step 02660  train_loss=3.3847  train_ppl=29.51  lr=3.00e-04
+step 02680  train_loss=3.0100  train_ppl=20.29  lr=3.00e-04
+step 02700  train_loss=3.5934  train_ppl=36.36  lr=3.00e-04
+step 02700  val_loss=3.5964  val_ppl=36.47
+saved best.pt  val_loss=3.5964  step=2700
+step 02720  train_loss=3.4069  train_ppl=30.17  lr=3.00e-04
+step 02740  train_loss=3.4572  train_ppl=31.73  lr=3.00e-04
+step 02760  train_loss=3.2517  train_ppl=25.84  lr=3.00e-04
+step 02780  train_loss=3.3988  train_ppl=29.93  lr=3.00e-04
+step 02800  train_loss=3.2313  train_ppl=25.31  lr=3.00e-04
+step 02800  val_loss=3.5864  val_ppl=36.11
+saved best.pt  val_loss=3.5864  step=2800
+sample: ROMEO: for thou art a gentleman, so that is thy 
+d than the poor father and the father hath been his to all. 
+ 
+ROMEO. 
+No, I will be as if any man be so. 
+ 
+NURSE. 
+Here, thou wert. What? 
+ 
+BENVOLIO. 
+If I was born
+step 02820  train_loss=3.2112  train_ppl=24.81  lr=3.00e-04
+step 02840  train_loss=3.4211  train_ppl=30.60  lr=3.00e-04
+step 02860  train_loss=3.3325  train_ppl=28.01  lr=3.00e-04
+step 02880  train_loss=3.2797  train_ppl=26.57  lr=3.00e-04
+step 02900  train_loss=3.3204  train_ppl=27.67  lr=3.00e-04
+step 02900  val_loss=3.5700  val_ppl=35.52
+saved best.pt  val_loss=3.5700  step=2900
+step 02920  train_loss=3.8359  train_ppl=46.34  lr=3.00e-04
+step 02940  train_loss=3.2883  train_ppl=26.80  lr=3.00e-04
+step 02960  train_loss=3.5167  train_ppl=33.67  lr=3.00e-04
+step 02980  train_loss=3.5892  train_ppl=36.21  lr=3.00e-04
+step 03000  train_loss=2.9955  train_ppl=19.99  lr=3.00e-04
+step 03000  val_loss=3.5587  val_ppl=35.12
+saved best.pt  val_loss=3.5587  step=3000
+sample: ROMEO: 
+No, well, 
+As I do not love the woman. 
+ 
+MERCUTIO. 
+To the contrary, O, 
+And to the heavens wherein I do, 
+I would not find a little world: 
+But since I see, I do, I fear, and I 
+(I do not find the ring which he
+step 03020  train_loss=3.3157  train_ppl=27.54  lr=3.00e-04
+step 03040  train_loss=2.9145  train_ppl=18.44  lr=3.00e-04
+step 03060  train_loss=3.0104  train_ppl=20.30  lr=3.00e-04
+step 03080  train_loss=3.1980  train_ppl=24.48  lr=3.00e-04
+step 03100  train_loss=3.3515  train_ppl=28.55  lr=3.00e-04
+step 03100  val_loss=3.5517  val_ppl=34.87
+saved best.pt  val_loss=3.5517  step=3100
+step 03120  train_loss=2.9574  train_ppl=19.25  lr=3.00e-04
+step 03140  train_loss=3.4538  train_ppl=31.62  lr=3.00e-04
+step 03160  train_loss=3.2657  train_ppl=26.20  lr=3.00e-04
+step 03180  train_loss=3.2251  train_ppl=25.16  lr=3.00e-04
+step 03200  train_loss=3.2449  train_ppl=25.66  lr=3.00e-04
+step 03200  val_loss=3.5418  val_ppl=34.53
+saved best.pt  val_loss=3.5418  step=3200
+sample: ROMEO: 
+B’s yet come. 
+ 
+NURSE. 
+Fie, fie, fie, do not hear. 
+O Juliet, what is she the man? 
+ 
+NURSE. 
+What? 
+ 
+NURSE. 
+Ay, or I will not. 
+ 
+NURSE.
+step 03220  train_loss=3.2984  train_ppl=27.07  lr=3.00e-04
+step 03240  train_loss=3.5143  train_ppl=33.59  lr=3.00e-04
+step 03260  train_loss=2.8502  train_ppl=17.29  lr=3.00e-04
+step 03280  train_loss=3.2867  train_ppl=26.75  lr=3.00e-04
+step 03300  train_loss=3.0012  train_ppl=20.11  lr=3.00e-04
+step 03300  val_loss=3.5619  val_ppl=35.23
+no improve  bad_evals=1/4
+step 03320  train_loss=3.0758  train_ppl=21.67  lr=3.00e-04
+step 03340  train_loss=3.2593  train_ppl=26.03  lr=3.00e-04
+step 03360  train_loss=2.9768  train_ppl=19.62  lr=3.00e-04
+step 03380  train_loss=3.0285  train_ppl=20.67  lr=3.00e-04
+step 03400  train_loss=2.9141  train_ppl=18.43  lr=3.00e-04
+step 03400  val_loss=3.5756  val_ppl=35.72
+no improve  bad_evals=2/4
+sample: ROMEO: 
+Now, if thou stand by, thou wilt not be 
+Thy love to me. 
+ 
+ROMEO. 
+Thou shalt be so, and thou wert so. 
+ 
+MERCUTIO. 
+Nay, my dear friend will be no more of that. 
+ 
+ROMEO. 
+Then, madam
+step 03420  train_loss=3.1523  train_ppl=23.39  lr=3.00e-04
+step 03440  train_loss=3.2883  train_ppl=26.80  lr=3.00e-04
+step 03460  train_loss=2.8811  train_ppl=17.83  lr=3.00e-04
+step 03480  train_loss=3.1443  train_ppl=23.20  lr=3.00e-04
+step 03500  train_loss=2.9240  train_ppl=18.62  lr=3.00e-04
+step 03500  val_loss=3.5914  val_ppl=36.29
+no improve  bad_evals=3/4
+step 03520  train_loss=2.9237  train_ppl=18.61  lr=3.00e-04
+step 03540  train_loss=3.2447  train_ppl=25.65  lr=3.00e-04
+step 03560  train_loss=3.1616  train_ppl=23.61  lr=3.00e-04
+step 03580  train_loss=2.9444  train_ppl=19.00  lr=3.00e-04
+step 03600  train_loss=3.1520  train_ppl=23.38  lr=3.00e-04
+step 03600  val_loss=3.6013  val_ppl=36.65
+no improve  bad_evals=4/4
+early_stop  step=3600  best_step=3200
+wall=154.8s  steps=1200  step/s=7.75
+peak_mem_MiB=2778.5
