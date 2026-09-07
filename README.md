@@ -10,7 +10,7 @@
 
 ```bash
 python scripts/sample.py \
-  --ckpt checkpoints/shakespeare_perdoc/best.pt \
+  --ckpt checkpoints/shakespeare_perdoc/weights.pt \
   --temperature 0.8 --top-k 50 --n 2 --cache
 ```
 
@@ -38,22 +38,18 @@ pip install -r requirements-gpu.txt
 
 ## 克隆下来缺权重
 
-`checkpoints/` 不进 git（GitHub 单文件上限 100MB，完整 ckpt 约 806MB）。语料 `data/shakespeare_plays/*.txt` 在仓库里。
+`checkpoints/` 不进 git。只含模型的权重在 Release：[v0.1.0 / weights.pt](https://github.com/lily-880/my_gpt/releases/download/v0.1.0/weights.pt)（约 268 MiB）。语料 `data/shakespeare_plays/*.txt` 在仓库里。
 
-本机已有 `best.pt` 时导出只含模型的文件（约 268 MiB）：
+```bash
+python scripts/fetch_weights.py
+python scripts/sample.py --ckpt checkpoints/shakespeare_perdoc/weights.pt --cache
+```
+
+本机训练快照 `best.pt`（含优化器，约 806 MiB）也能给 `sample.py` / `chat_cli.py` 用，不对外传。重新导出：
 
 ```bash
 python scripts/export_weights.py --ckpt checkpoints/shakespeare_perdoc/best.pt
 ```
-
-别人需要权重时，把 `weights.pt` 放到网盘或 GitHub Release，再：
-
-```bash
-python scripts/fetch_weights.py --url <直链>
-python scripts/sample.py --ckpt checkpoints/shakespeare_perdoc/weights.pt --cache
-```
-
-`sample.py` / `chat_cli.py` 也能读原来的 `best.pt`。
 
 ## 结果摘要
 

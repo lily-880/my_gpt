@@ -13,6 +13,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 DEFAULT_OUT = ROOT / "checkpoints" / "shakespeare_perdoc" / "weights.pt"
+DEFAULT_URL = (
+    os.environ.get("MY_GPT_WEIGHTS_URL")
+    or "https://github.com/lily-880/my_gpt/releases/download/v0.1.0/weights.pt"
+)
 
 
 def main() -> None:
@@ -20,18 +24,11 @@ def main() -> None:
     parser.add_argument(
         "--url",
         type=str,
-        default=os.environ.get("MY_GPT_WEIGHTS_URL", ""),
-        help="直链。也可设环境变量 MY_GPT_WEIGHTS_URL",
+        default=DEFAULT_URL,
+        help="直链。默认 GitHub Release v0.1.0。也可设 MY_GPT_WEIGHTS_URL",
     )
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     args = parser.parse_args()
-    if not args.url:
-        raise SystemExit(
-            "没有 URL。把权重放到网盘或 GitHub Release 后：\n"
-            "  python scripts/fetch_weights.py --url <直链>\n"
-            "本机已有 best.pt 时：\n"
-            "  python scripts/export_weights.py"
-        )
     args.out.parent.mkdir(parents=True, exist_ok=True)
     print(f"downloading {args.url} -> {args.out}", flush=True)
     urllib.request.urlretrieve(args.url, args.out)
