@@ -1,0 +1,12 @@
+{
+  "ckpt": "/home/michael/gpt\uff01/my_gpt/checkpoints/shakespeare_perdoc/best.pt",
+  "device": "cuda",
+  "max_new_tokens": 80,
+  "greedy_match": true,
+  "no_cache_s": 0.40200879400072154,
+  "kvcache_s": 0.29625368699998944,
+  "speedup": 1.3569748213825128,
+  "no_cache_tok_s": 199.0006218616611,
+  "kvcache_tok_s": 270.03883330573655,
+  "note": "\u5355\u6761 greedy\u3002cache \u662f (B,H,T,D) \u6309\u6b65 cat\uff0c\u4e0d\u662f PagedAttention\u3002"
+}

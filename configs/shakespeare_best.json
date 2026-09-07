@@ -1,4 +1,5 @@
 {
+  "note": "过拟合复盘配方，不要当对外 demo。权重已删，数字见 assets/experiments/2026-09-04_shakespeare_best_overfit/",
   "n_layer": 6,
   "n_head": 8,
   "n_embd": 512,

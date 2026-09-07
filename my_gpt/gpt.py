@@ -1,7 +1,4 @@
-"""Decoder-only GPT：Day 2 积木 + Day 3 整模型。
-
-刻意不用 FlashAttention / GQA / QK-Norm，方便把公式写成看得见的矩阵乘法。
-"""
+"""Decoder-only GPT：RoPE 或可学习位置、RMSNorm、因果注意力。"""
 
 from __future__ import annotations
 
@@ -70,14 +67,22 @@ def apply_rope(x: torch.Tensor, cos: torch.Tensor, sin: torch.Tensor) -> torch.T
 
 
 def causal_attention(q: torch.Tensor, k: torch.Tensor, v: torch.Tensor, dropout_p: float = 0.0) -> torch.Tensor:
-    """单头或多头共用：q/k/v 都是 (B, H, T, D)，H=1 就是单头。"""
-    t = q.size(-2)
+    """q 是 (B, H, Tq, D)，k/v 是 (B, H, Tk, D)。Tq==Tk 是整段；解码时 Tq=1、Tk=已有长度。
+
+    假定 q 是 k 的后缀：第 i 个 query 的绝对位置是 (Tk-Tq+i)，只能看见 <= 该位置的 key。
+    """
+    tq, tk = q.size(-2), k.size(-2)
+    if tk < tq:
+        raise ValueError(f"k 长度 {tk} 短于 q 长度 {tq}")
     scale = 1.0 / math.sqrt(q.size(-1))
     scores = (q @ k.transpose(-2, -1)) * scale
-    mask = build_causal_mask(t, device=q.device)
-    scores = scores.masked_fill(~mask, float("-inf"))
+    offset = tk - tq
+    q_pos = torch.arange(tq, device=q.device) + offset
+    k_pos = torch.arange(tk, device=q.device)
+    allow = k_pos.unsqueeze(0) <= q_pos.unsqueeze(1)
+    scores = scores.masked_fill(~allow, float("-inf"))
     weights = F.softmax(scores, dim=-1)
-    weights = F.dropout(weights, p=dropout_p, training=True)
+    weights = F.dropout(weights, p=dropout_p, training=dropout_p > 0.0)
     return weights @ v
 
 
@@ -100,10 +105,17 @@ class CausalSelfAttention(nn.Module):
         self.register_buffer("cos", cos, persistent=False)
         self.register_buffer("sin", sin, persistent=False)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self,
+        x: torch.Tensor,
+        kv_cache: tuple[torch.Tensor, torch.Tensor] | None = None,
+        use_cache: bool = False,
+    ):
         b, t, c = x.shape
-        if t > self.cos.size(2):
-            raise ValueError(f"序列长度 {t} 超过 block_size={self.cos.size(2)}")
+        past_len = 0 if kv_cache is None else kv_cache[0].size(2)
+        total = past_len + t
+        if total > self.cos.size(2):
+            raise ValueError(f"序列长度 {total} 超过 block_size={self.cos.size(2)}")
 
         qkv = self.c_attn(x)
         q, k, v = qkv.split(c, dim=-1)
@@ -112,13 +124,20 @@ class CausalSelfAttention(nn.Module):
         v = v.view(b, t, self.n_head, self.head_dim).transpose(1, 2)
 
         if self.use_rope:
-            cos = self.cos[:, :, :t, :]
-            sin = self.sin[:, :, :t, :]
+            cos = self.cos[:, :, past_len:total, :]
+            sin = self.sin[:, :, past_len:total, :]
             q, k = apply_rope(q, cos, sin), apply_rope(k, cos, sin)
+
+        if kv_cache is not None:
+            k = torch.cat([kv_cache[0], k], dim=2)
+            v = torch.cat([kv_cache[1], v], dim=2)
 
         y = causal_attention(q, k, v, dropout_p=self.dropout if self.training else 0.0)
         y = y.transpose(1, 2).contiguous().view(b, t, c)
-        return self.c_proj(y)
+        y = self.c_proj(y)
+        if use_cache:
+            return y, (k, v)
+        return y
 
 
 class FeedForward(nn.Module):
@@ -146,7 +165,17 @@ class TransformerBlock(nn.Module):
         self.ln_2 = RMSNorm(config.n_embd)
         self.ffn = FeedForward(config)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self,
+        x: torch.Tensor,
+        kv_cache: tuple[torch.Tensor, torch.Tensor] | None = None,
+        use_cache: bool = False,
+    ):
+        if use_cache:
+            attn_out, kv = self.attn(self.ln_1(x), kv_cache=kv_cache, use_cache=True)
+            x = x + attn_out
+            x = x + self.ffn(self.ln_2(x))
+            return x, kv
         x = x + self.attn(self.ln_1(x))
         x = x + self.ffn(self.ln_2(x))
         return x
@@ -203,3 +232,28 @@ class GPT(nn.Module):
                 ignore_index=-100,
             )
         return logits, loss
+
+    def forward_kv(
+        self,
+        idx: torch.Tensor,
+        cache: list[tuple[torch.Tensor, torch.Tensor]] | None = None,
+    ) -> tuple[torch.Tensor, list[tuple[torch.Tensor, torch.Tensor]]]:
+        """只算新 token。cache 每层是 (k, v)，形状 (B, H, T_past, head_dim)。解码时 idx 通常是 (B, 1)。"""
+        t = idx.shape[1]
+        past_len = 0 if cache is None else cache[0][0].size(2)
+        total = past_len + t
+        if total > self.config.block_size:
+            raise ValueError(f"序列长度 {total} 超过 block_size={self.config.block_size}")
+
+        x = self.wte(idx)
+        if self.wpe is not None:
+            pos = torch.arange(past_len, total, device=idx.device)
+            x = x + self.wpe(pos)
+        x = self.drop(x)
+        new_cache: list[tuple[torch.Tensor, torch.Tensor]] = []
+        for i, block in enumerate(self.blocks):
+            layer_kv = None if cache is None else cache[i]
+            x, layer_kv = block(x, kv_cache=layer_kv, use_cache=True)
+            new_cache.append(layer_kv)
+        logits = self.lm_head(self.ln_f(x))
+        return logits, new_cache

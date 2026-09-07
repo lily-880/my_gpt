@@ -1,0 +1,121 @@
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+student_init checkpoints/shakespeare_perdoc/best.pt
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2693.35it/s]
+teacher=gpt2  frozen  amp=torch.bfloat16  scaler=False
+before  student_val_ce=3.5112  student_ppl=33.49  teacher_val_ce=4.1255  teacher_ppl=61.90
+note: Teacher 在这套莎士比亚 val 上比 Student 差。蒸馏是方法练习，不要覆盖 shakespeare_perdoc/best.pt。
+distill  temperature=1.0  alpha=0.7  L=α T² KL + (1-α) CE
+step 00001  loss=2.6144  ce=3.1858  kl=2.3695  kd=2.3695  lr=1.00e-04
+step 00020  loss=2.1864  ce=3.4693  kl=1.6366  kd=1.6366  lr=1.00e-04
+step 00040  loss=1.9634  ce=3.1416  kl=1.4584  kd=1.4584  lr=1.00e-04
+step 00060  loss=2.0360  ce=3.4376  kl=1.4353  kd=1.4353  lr=1.00e-04
+step 00080  loss=1.7214  ce=3.0078  kl=1.1701  kd=1.1701  lr=1.00e-04
+step 00100  loss=1.6459  ce=3.1050  kl=1.0206  kd=1.0206  lr=1.00e-04
+step 00100  val_ce=3.6767  val_ppl=39.52
+saved best.pt  val_ce=3.6767  step=100
+step 00120  loss=1.7421  ce=3.4267  kl=1.0202  kd=1.0202  lr=1.00e-04
+step 00140  loss=1.7656  ce=3.3634  kl=1.0808  kd=1.0808  lr=1.00e-04
+step 00160  loss=1.7659  ce=3.5076  kl=1.0195  kd=1.0195  lr=1.00e-04
+step 00180  loss=1.5055  ce=2.8552  kl=0.9271  kd=0.9271  lr=1.00e-04
+step 00200  loss=1.6246  ce=3.2259  kl=0.9383  kd=0.9383  lr=1.00e-04
+step 00200  val_ce=3.6853  val_ppl=39.86
+no improve  bad_evals=1/4
+sample: ROMEO:  ! a little fellow, and a great creature; but 
+
+[Enter a Gentleman] O, she should kill me
+
+
+MIONE.
+ 
+TJULIUS I have made me, and I have done your
+
+
+O, you want it.
+
+SCHORUS.
+Pray, you gods, I am a little.
+step 00220  loss=1.7175  ce=3.3750  kl=1.0071  kd=1.0071  lr=1.00e-04
+step 00240  loss=1.7481  ce=3.6357  kl=0.9391  kd=0.9391  lr=1.00e-04
+step 00260  loss=1.7525  ce=3.4753  kl=1.0141  kd=1.0141  lr=1.00e-04
+step 00280  loss=1.5957  ce=3.1706  kl=0.9208  kd=0.9208  lr=1.00e-04
+step 00300  loss=1.8859  ce=3.9724  kl=0.9917  kd=0.9917  lr=1.00e-04
+step 00300  val_ce=3.5983  val_ppl=36.54
+saved best.pt  val_ce=3.5983  step=300
+step 00320  loss=1.7677  ce=3.5633  kl=0.9981  kd=0.9981  lr=1.00e-04
+step 00340  loss=1.5585  ce=3.1379  kl=0.8817  kd=0.8817  lr=1.00e-04
+step 00360  loss=1.7077  ce=3.5168  kl=0.9324  kd=0.9324  lr=1.00e-04
+step 00380  loss=1.6325  ce=3.4602  kl=0.8492  kd=0.8492  lr=1.00e-04
+step 00400  loss=1.5503  ce=3.1832  kl=0.8505  kd=0.8505  lr=1.00e-04
+step 00400  val_ce=3.6397  val_ppl=38.08
+no improve  bad_evals=1/4
+sample: ROMEO:
+
+"URDERER.
+
+MURDERER 
+
+ME. 
+
+NURSE. 
+Hath to you, my dear niece. 
+ 
+JULTIS.  
+A whoreson and a jot. 
+ 
+NURSE. 
+Why, thou art the king, my lord‌.  
+step 00420  loss=1.4424  ce=2.8085  kl=0.8569  kd=0.8569  lr=1.00e-04
+step 00440  loss=1.6235  ce=3.0701  kl=1.0035  kd=1.0035  lr=1.00e-04
+step 00460  loss=1.6001  ce=3.2334  kl=0.9001  kd=0.9001  lr=1.00e-04
+step 00480  loss=1.6710  ce=3.3172  kl=0.9655  kd=0.9655  lr=1.00e-04
+step 00500  loss=1.6446  ce=3.6360  kl=0.7912  kd=0.7912  lr=1.00e-04
+step 00500  val_ce=3.6057  val_ppl=36.81
+no improve  bad_evals=2/4
+step 00520  loss=1.4435  ce=3.0062  kl=0.7738  kd=0.7738  lr=1.00e-04
+step 00540  loss=1.5507  ce=3.0682  kl=0.9004  kd=0.9004  lr=1.00e-04
+step 00560  loss=1.7825  ce=3.8197  kl=0.9094  kd=0.9094  lr=1.00e-04
+step 00580  loss=1.4991  ce=3.0072  kl=0.8528  kd=0.8528  lr=1.00e-04
+step 00600  loss=1.6603  ce=3.4476  kl=0.8943  kd=0.8943  lr=1.00e-04
+step 00600  val_ce=3.6110  val_ppl=37.00
+no improve  bad_evals=3/4
+sample: ROMEO:
+
+
+"
+
+
+LONDON
+
+
+
+
+MAC
+
+
+
+
+
+The day is the news for the first, and in the day
+
+In the night we see,
+
+
+
+BULY.
+
+
+And there are the suns of the rest:
+
+LADY MACBETH, Mowbras
+
+The moon
+step 00620  loss=1.6080  ce=3.4209  kl=0.8310  kd=0.8310  lr=1.00e-04
+step 00640  loss=1.7204  ce=3.6593  kl=0.8894  kd=0.8894  lr=1.00e-04
+step 00660  loss=1.7779  ce=3.7862  kl=0.9172  kd=0.9172  lr=1.00e-04
+step 00680  loss=1.6213  ce=3.4449  kl=0.8397  kd=0.8397  lr=1.00e-04
+step 00700  loss=1.6280  ce=3.4063  kl=0.8658  kd=0.8658  lr=1.00e-04
+step 00700  val_ce=3.6086  val_ppl=36.91
+no improve  bad_evals=4/4
+early_stop  step=700  best_step=300
+wall=86.0s  steps=700  step/s=8.14
+peak_mem_MiB=2845.3

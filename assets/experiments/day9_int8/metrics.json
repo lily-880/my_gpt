@@ -1,0 +1,29 @@
+{
+  "ckpt": "checkpoints/shakespeare_perdoc/best.pt",
+  "note": "CPU \u52a8\u6001 PTQ\uff0c\u53ea\u91cf\u5316 Linear\u3002\u4e0d\u8986\u76d6\u4e13\u5bb6 ckpt\u3002\u4e0d\u662f GPU Tensor Core INT8\u3002",
+  "fp32": {
+    "name": "fp32",
+    "val_loss": 3.5417030811309815,
+    "val_ppl": 34.525669164359776,
+    "eval_s": 10.481850039001074,
+    "gen_s": 0.5751809419998608,
+    "tok_per_s": 69.54333337423006,
+    "state_dict_mib": 268.35525608062744,
+    "tensor_mib": 268.341796875,
+    "plain_linear": 25
+  },
+  "int8": {
+    "name": "int8",
+    "val_loss": 3.5450490951538085,
+    "val_ppl": 34.6413860246879,
+    "eval_s": 8.428613447998941,
+    "gen_s": 0.38508842599912896,
+    "tok_per_s": 103.87224673454735,
+    "state_dict_mib": 140.75428295135498,
+    "tensor_mib": 98.18387985229492,
+    "plain_linear": 0
+  },
+  "size_ratio_fp32_over_int8": 1.9065512640448155,
+  "ppl_delta": 0.11571686032812067,
+  "gen_speedup": 1.4936334181104727
+}

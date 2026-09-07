@@ -1,0 +1,42 @@
+INFO 09-07 13:24:20 [__init__.py:239] Automatically detected platform cuda.
+vllm_model=data/hf_gpt2  (官方 HF id，不是自研 .pt)
+`torch_dtype` is deprecated! Use `dtype` instead!
+INFO 09-07 13:24:21 [config.py:2968] Downcasting torch.float32 to torch.float16.
+INFO 09-07 13:24:27 [config.py:717] This model supports multiple tasks: {'generate', 'classify', 'score', 'embed', 'reward'}. Defaulting to 'generate'.
+INFO 09-07 13:24:27 [config.py:2003] Chunked prefill is enabled with max_num_batched_tokens=8192.
+WARNING 09-07 13:24:27 [cuda.py:93] To see benefits of async output processing, enable CUDA graph. Since, enforce-eager is enabled, async output processor cannot be used
+INFO 09-07 13:24:28 [core.py:58] Initializing a V1 LLM engine (v0.8.5.post1) with config: model='data/hf_gpt2', speculative_config=None, tokenizer='data/hf_gpt2', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.float16, max_seq_len=1024, download_dir=None, load_format=LoadFormat.AUTO, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=True, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='auto', reasoning_backend=None), observability_config=ObservabilityConfig(show_hidden_metrics=False, otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=None, served_model_name=data/hf_gpt2, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=False, disable_mm_preprocessor_cache=False, mm_processor_kwargs=None, pooler_config=None, compilation_config={"splitting_ops":[],"compile_sizes":[],"cudagraph_capture_sizes":[],"max_capture_size":0}
+WARNING 09-07 13:24:28 [utils.py:2522] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x703023ad3b00>
+INFO 09-07 13:24:28 [parallel_state.py:1004] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0
+WARNING 09-07 13:24:28 [interface.py:314] Using 'pin_memory=False' as WSL is detected. This may slow down the performance.
+INFO 09-07 13:24:28 [cuda.py:221] Using Flash Attention backend on V1 engine.
+WARNING 09-07 13:24:28 [topk_topp_sampler.py:69] FlashInfer is not available. Falling back to the PyTorch-native implementation of top-p & top-k sampling. For the best performance, please install FlashInfer.
+INFO 09-07 13:24:28 [gpu_model_runner.py:1329] Starting to load model data/hf_gpt2...
+Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  6.45it/s]
+Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  6.45it/s]
+
+INFO 09-07 13:24:28 [loader.py:458] Loading weights took 0.17 seconds
+INFO 09-07 13:24:29 [gpu_model_runner.py:1347] Model loading took 0.2378 GiB and 0.205570 seconds
+INFO 09-07 13:24:29 [kv_cache_utils.py:634] GPU KV cache size: 28,208 tokens
+INFO 09-07 13:24:29 [kv_cache_utils.py:637] Maximum concurrency for 1,024 tokens per request: 27.55x
+INFO 09-07 13:24:29 [core.py:159] init engine (profile, create kv cache, warmup model) took 0.87 seconds
+INFO 09-07 13:24:29 [core_client.py:439] Core engine process 0 ready.
+vllm_load_s=8.4
+vllm_single  prompts=1  new_tok=64  s=0.371  tok/s=172.7
+vllm_batch   prompts=8  new_tok=512  s=0.411  tok/s=1245.3
+hf_load_s=0.5
+hf_single  prompts=1  s=0.517  tok/s~=123.9
+hf_seq     prompts=8  s=3.918  tok/s~=130.7
+
+===== summary =====
+{
+  "model": "data/hf_gpt2",
+  "note": "\u6846\u67b6 Demo\uff1a\u5b98\u65b9 gpt2\u3002\u672a\u52a0\u8f7d shakespeare_perdoc/best.pt\u3002\u4e0d\u662f TensorRT-LLM\u3002",
+  "max_tokens": 64,
+  "batch_speedup_vs_hf_seq": 9.530469301372241,
+  "vllm_batch_tok_s": 1245.2974243220006,
+  "vllm_single_s": 0.37052058999870496,
+  "hf_seq_s": 3.9184215650002443
+}
+wrote assets/experiments/day11_vllm/metrics.json

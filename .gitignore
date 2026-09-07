@@ -13,10 +13,12 @@ build/
 # Jupyter
 .ipynb_checkpoints/
 
-# Logs, weights, local data
+# Logs, weights, local caches
 logs/
 checkpoints/
-data/
+data/*
+!data/shakespeare_plays/
+!data/shakespeare_plays/**
 *.pt
 *.pth
 *.ckpt
@@ -28,3 +30,4 @@ data/
 
 # OS
 .DS_Store
+.pytest_cache/

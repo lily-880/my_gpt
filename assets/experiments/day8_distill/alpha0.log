@@ -1,0 +1,70 @@
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+student_init checkpoints/shakespeare_perdoc/best.pt
+`torch_dtype` is deprecated! Use `dtype` instead!
+teacher=data/hf_gpt2  frozen  amp=torch.bfloat16  scaler=False
+before  student_val_ce=3.5112  student_ppl=33.49  teacher_val_ce=4.1236  teacher_ppl=61.78
+note: Teacher val 比 Student 差。ckpt 写在本目录，不动 shakespeare_perdoc/best.pt。
+distill  temperature=4.0  alpha=0.0  L=α T² KL + (1-α) CE
+alpha=0：本步不算老师，只继续硬标签 CE（对照「多训几步」）。
+step 00001  loss=2.3249  ce=2.3249  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00020  loss=2.7046  ce=2.7046  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00040  loss=2.9151  ce=2.9151  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00060  loss=2.9742  ce=2.9742  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00080  loss=2.5310  ce=2.5310  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00100  loss=2.7837  ce=2.7837  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00100  val_ce=3.5108  val_ppl=33.48
+saved best.pt  val_ce=3.5108  step=100
+step 00120  loss=3.2576  ce=3.2576  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00140  loss=3.0022  ce=3.0022  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00160  loss=2.9155  ce=2.9155  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00180  loss=3.1748  ce=3.1748  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00200  loss=2.8949  ce=2.8949  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00200  val_ce=3.5131  val_ppl=33.55
+no improve  bad_evals=1/4
+sample: ROMEO: 
+But let’s sit and hold it much. 
+ 
+LORENZO. 
+That is too late. 
+And in that House that know not what it can. 
+ 
+ROMEO. 
+Nay, it hath no breath in me, nor the world’s day 
+Should I endure it. 
+ 
+
+step 00220  loss=3.1215  ce=3.1215  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00240  loss=2.6102  ce=2.6102  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00260  loss=2.6620  ce=2.6620  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00280  loss=2.6374  ce=2.6374  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00300  loss=2.7805  ce=2.7805  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00300  val_ce=3.5172  val_ppl=33.69
+no improve  bad_evals=2/4
+step 00320  loss=2.7493  ce=2.7493  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00340  loss=2.5684  ce=2.5684  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00360  loss=2.8517  ce=2.8517  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00380  loss=3.0544  ce=3.0544  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00400  loss=2.7875  ce=2.7875  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00400  val_ce=3.5182  val_ppl=33.72
+no improve  bad_evals=3/4
+sample: ROMEO: 
+To take them from thee with thy love, 
+And tell thee more than love is done. 
+ 
+ROMEO. 
+Come, good father, 
+I will to thee, and to be bold, 
+Whose blood, to heaven and my love’s love, 
+Is thine. 
+ 
+FRIAR LAWRENCE
+step 00420  loss=3.0891  ce=3.0891  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00440  loss=2.9909  ce=2.9909  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00460  loss=3.0307  ce=3.0307  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00480  loss=3.3865  ce=3.3865  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00500  loss=2.4798  ce=2.4798  kl=0.0000  kd=0.0000  lr=1.00e-04
+step 00500  val_ce=3.5254  val_ppl=33.97
+no improve  bad_evals=4/4
+early_stop  step=500  best_step=100
+wall=41.4s  steps=500  step/s=12.09
+peak_mem_MiB=2032.5

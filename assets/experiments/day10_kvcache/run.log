@@ -1,0 +1,17 @@
+ckpt=/home/michael/gpt！/my_gpt/checkpoints/shakespeare_perdoc/best.pt  device=cuda  new_tokens=80  greedy 对照
+greedy_match=True
+no_cache=0.402s  (199.0 tok/s)  kvcache=0.296s  (270.0 tok/s)  speedup=1.36x  warmup_no_cache=0.398s
+sample: ROMEO: 
+And I am dead, and I will not be. 
+ 
+FALSTAFF. 
+O, thou art a man. 
+ 
+FALSTAFF. 
+O, thou art a man. 
+ 
+FALSTAFF. 
+O, thou art a man. 
+ 
+FALSTAFF.
+wrote assets/experiments/day10_kvcache/metrics.json

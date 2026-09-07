@@ -25,6 +25,7 @@ from my_gpt.utils import (
     autocast_context,
     evaluate_loss,
     perplexity_from_loss,
+    pick_device,
     sample_generate,
     train_step,
 )
@@ -50,16 +51,6 @@ def load_train_state(ckpt_dir: Path) -> dict:
 def save_train_state(ckpt_dir: Path, state: dict) -> None:
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     (ckpt_dir / "train_state.json").write_text(json.dumps(state, indent=2), encoding="utf-8")
-
-
-def pick_device(name: str) -> torch.device:
-    if name == "cuda":
-        if not torch.cuda.is_available():
-            raise RuntimeError("指定了 cuda 但当前没有 GPU")
-        return torch.device("cuda")
-    if name == "cpu":
-        return torch.device("cpu")
-    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 def run_train(
@@ -232,7 +223,7 @@ def run_train(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="单卡预训练（Day 5）")
-    parser.add_argument("--config", type=Path, default=ROOT / "configs" / "default.json")
+    parser.add_argument("--config", type=Path, default=ROOT / "configs" / "shakespeare_perdoc.json")
     parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"])
     parser.add_argument("--ckpt-dir", type=Path, default=ROOT / "checkpoints" / "base")
     parser.add_argument("--data-file", type=Path, default=None, help="覆盖默认莎士比亚全集")

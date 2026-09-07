@@ -1,0 +1,21 @@
+{
+  "learning_rate": 1e-4,
+  "weight_decay": 0.1,
+  "batch_size": 4,
+  "max_steps": 4000,
+  "grad_clip": 1.0,
+  "log_every": 20,
+  "eval_every": 100,
+  "sample_every": 200,
+  "max_new_tokens": 80,
+  "eval_batches": 20,
+  "random_windows": false,
+  "sample_temperature": 0.8,
+  "sample_top_k": 50,
+  "patience": 4,
+  "min_eval_step": 200,
+  "split": "per_doc",
+  "split_seed": 42,
+  "temperature": 4.0,
+  "alpha": 0.0
+}

@@ -1,9 +1,4 @@
-# 云 GPU：先装带 CUDA 的 PyTorch（按云镜像或 pytorch.org 说明），
-# 再装下面这些。不要在本机 WSL 无卡环境执行本文件。
-transformers>=4.40
-datasets>=2.14
-matplotlib>=3.7
-pytest>=7.0
-tqdm
-numpy
-vllm>=0.5
+# 配当前 torch 2.6.0+cu124。最新 vLLM 会升 torch。
+# transformers 要 <5，否则 0.8.5 的 tokenizer 接口对不上。
+transformers>=4.51.1,<5
+vllm==0.8.5.post1

@@ -13,24 +13,26 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from my_gpt.checkpoint import gpt_config_from_checkpoint, load_checkpoint
+from my_gpt.engine import Engine
 from my_gpt.gpt import GPT
 from my_gpt.tokenizer import GPT2TokenizerWrapper
-from my_gpt.utils import sample_generate
+from my_gpt.utils import pick_device, sample_generate
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="从 .pt 抽样生成")
     parser.add_argument("--ckpt", type=Path, required=True)
-    parser.add_argument("--device", type=str, default="cuda")
+    parser.add_argument("--device", type=str, default="auto", choices=["auto", "cpu", "cuda"])
     parser.add_argument("--prompt", type=str, default="ROMEO:")
     parser.add_argument("--max-new-tokens", type=int, default=120)
     parser.add_argument("--temperature", type=float, default=0.8)
     parser.add_argument("--top-k", type=int, default=50)
     parser.add_argument("--n", type=int, default=3, help="生成几条")
     parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument("--cache", action="store_true", help="用 KV-Cache，只算新 token")
     args = parser.parse_args()
 
-    device = torch.device(args.device)
+    device = pick_device(args.device)
     if args.seed is not None:
         torch.manual_seed(args.seed)
         if device.type == "cuda":
@@ -43,17 +45,21 @@ def main() -> None:
     tokenizer = GPT2TokenizerWrapper()
     prompt_ids = tokenizer.encode(args.prompt) or [tokenizer.eos_id]
 
-    print(f"ckpt={args.ckpt}  temp={args.temperature}  top_k={args.top_k}")
+    print(f"ckpt={args.ckpt}  temp={args.temperature}  top_k={args.top_k}  cache={args.cache}")
+    engine = Engine(model, temperature=args.temperature, top_k=args.top_k) if args.cache else None
     for i in range(args.n):
         idx = torch.tensor([prompt_ids], device=device)
-        out = sample_generate(
-            model,
-            idx,
-            args.max_new_tokens,
-            cfg.block_size,
-            temperature=args.temperature,
-            top_k=args.top_k,
-        )
+        if engine is not None:
+            out = engine.generate(idx, args.max_new_tokens)
+        else:
+            out = sample_generate(
+                model,
+                idx,
+                args.max_new_tokens,
+                cfg.block_size,
+                temperature=args.temperature,
+                top_k=args.top_k,
+            )
         print(f"\n===== sample {i + 1} =====")
         print(tokenizer.decode(out[0].tolist()))
 

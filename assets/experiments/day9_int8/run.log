@@ -1,0 +1,53 @@
+ckpt=checkpoints/shakespeare_perdoc/best.pt  device=cpu  linears=25  （动态量化 nn.Linear；不是 QAT，不是 GPU INT8）
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+val  split=per_doc  seed=42  batch=8  eval_batches=20
+fp32  val_loss=3.5417  val_ppl=34.53  eval_s=10.5
+fp32  gen_s=0.58  tok/s=69.54  (warmup 后 1 次, 40 tokens)
+
+===== fp32 sample 1 =====
+ROMEO: ” ” was not the 
+mang'd. No, not I, but that now did speak 
+ That I did find a man as thou art, 
+ So should I
+
+===== fp32 sample 2 =====
+ROMEO: 
+No more than this is true. But when it comes, 
+For this is done; therefore ’tis too ill 
+Of that we will not speak; and so I know
+fp32  state_dict=268.4 MiB  tensor_bytes=268.3 MiB  plain_linear=25
+quantized  in 0.5s  leftover_linear=0
+int8  val_loss=3.5450  val_ppl=34.64  eval_s=8.4
+int8  gen_s=0.39  tok/s=103.87  (warmup 后 1 次, 40 tokens)
+
+===== int8 sample 1 =====
+ROMEO: ” ” was not the 
+mantwere to be the villain. 
+ 
+LADY CAPTAIN. 
+O, why should it be. 
+ 
+
+
+===== int8 sample 2 =====
+ROMEO: 
+No more thou best nor name thee, to love thee. 
+ 
+’Tis not to die, than honour be true servant. 
+ 
+NURSE.
+int8  state_dict=140.8 MiB  tensor_bytes=98.2 MiB  plain_linear=0
+
+===== summary =====
+{
+  "ckpt": "checkpoints/shakespeare_perdoc/best.pt",
+  "note": "CPU \u52a8\u6001 PTQ\uff0c\u53ea\u91cf\u5316 Linear\u3002\u4e0d\u8986\u76d6\u4e13\u5bb6 ckpt\u3002\u4e0d\u662f GPU Tensor Core INT8\u3002",
+  "size_ratio_fp32_over_int8": 1.9065512640448155,
+  "ppl_delta": 0.11571686032812067,
+  "gen_speedup": 1.4936334181104727
+}
+size  fp32=268.4 MiB  int8=140.8 MiB  ratio=1.91x
+ppl   fp32=34.53  int8=34.64  delta=+0.12
+gen   fp32=0.58s  int8=0.39s  speedup=1.49x
+wrote assets/experiments/day9_int8/metrics.json  assets/experiments/day9_int8/samples.md
+专家权重未改动：checkpoints/shakespeare_perdoc/best.pt

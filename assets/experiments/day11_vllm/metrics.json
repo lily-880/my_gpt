@@ -1,0 +1,27 @@
+{
+  "model": "data/hf_gpt2",
+  "note": "\u6846\u67b6 Demo\uff1a\u5b98\u65b9 gpt2\u3002\u672a\u52a0\u8f7d shakespeare_perdoc/best.pt\u3002\u4e0d\u662f TensorRT-LLM\u3002",
+  "max_tokens": 64,
+  "vllm": {
+    "backend": "vllm",
+    "load_s": 8.370783874999688,
+    "single_s": 0.37052058999870496,
+    "single_tok": 64,
+    "single_tok_s": 172.72994194526055,
+    "batch_prompts": 8,
+    "batch_s": 0.4111467589991662,
+    "batch_tok": 512,
+    "batch_tok_s": 1245.2974243220006
+  },
+  "hf": {
+    "backend": "hf_generate",
+    "load_s": 0.45135848700010683,
+    "single_s": 0.5165974749997986,
+    "single_tok_s_approx": 123.88755868391527,
+    "batch_prompts": 8,
+    "seq_s": 3.9184215650002443,
+    "seq_tok_s_approx": 130.6648586699395,
+    "note": "HF \u6309\u6761\u4e32\u884c generate\uff0c\u7528\u6765\u5bf9\u7167\uff1b\u4e0d\u662f\u516c\u5e73\u7684 kernel \u5bf9 kernel\u3002"
+  },
+  "batch_speedup_vs_hf_seq": 9.530469301372241
+}

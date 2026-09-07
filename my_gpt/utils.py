@@ -15,6 +15,17 @@ def perplexity_from_loss(loss: torch.Tensor | float) -> float:
     return math.exp(float(loss))
 
 
+def pick_device(name: str = "auto") -> torch.device:
+    """auto：有 CUDA 用 GPU，否则 CPU。显式 cuda 但当前没卡则报错。"""
+    if name == "cuda":
+        if not torch.cuda.is_available():
+            raise RuntimeError("指定了 cuda 但当前没有 GPU")
+        return torch.device("cuda")
+    if name == "cpu":
+        return torch.device("cpu")
+    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 def amp_dtype_and_scaler(device: torch.device):
     """CPU 不用 AMP。CUDA 上优先 bf16（不用 GradScaler）；否则 fp16 + GradScaler。"""
     if device.type != "cuda":
@@ -83,6 +94,42 @@ def evaluate_loss(model: nn.Module, loader, device: torch.device, autocast_ctx=N
     return total / n
 
 
+def sample_next_id(
+    logits: torch.Tensor,
+    *,
+    temperature: float = 0.8,
+    top_k: int | None = 50,
+    top_p: float | None = None,
+    repetition_penalty: float = 1.0,
+    past_ids: torch.Tensor | None = None,
+) -> torch.Tensor:
+    """从 (B, V) logits 抽下一个 id，返回 (B, 1)。temperature<=0 为 greedy。"""
+    logits = logits.clone()
+    if repetition_penalty != 1.0 and past_ids is not None:
+        # HF 惯例：出现过的 token，正 logit 除以罚、负 logit 乘以罚，压低重复。
+        for b in range(logits.size(0)):
+            uniq = past_ids[b].unique()
+            selected = logits[b, uniq]
+            logits[b, uniq] = torch.where(selected > 0, selected / repetition_penalty, selected * repetition_penalty)
+    if temperature <= 0:
+        return torch.argmax(logits, dim=-1, keepdim=True)
+    logits = logits / temperature
+    if top_k is not None and top_k > 0:
+        k = min(top_k, logits.size(-1))
+        thresh = torch.topk(logits, k, dim=-1).values[:, -1:]
+        logits = logits.masked_fill(logits < thresh, float("-inf"))
+    if top_p is not None and 0.0 < top_p < 1.0:
+        sorted_logits, sorted_idx = torch.sort(logits, dim=-1, descending=True)
+        probs = F.softmax(sorted_logits, dim=-1)
+        cum = probs.cumsum(dim=-1)
+        drop = cum - probs > top_p
+        sorted_logits = sorted_logits.masked_fill(drop, float("-inf"))
+        logits = torch.full_like(logits, float("-inf"))
+        logits.scatter_(1, sorted_idx, sorted_logits)
+    probs = F.softmax(logits, dim=-1)
+    return torch.multinomial(probs, num_samples=1)
+
+
 @torch.no_grad()
 def greedy_generate(model: nn.Module, idx: torch.Tensor, max_new_tokens: int, block_size: int) -> torch.Tensor:
     """每步取概率最大的下一个 token。容易复读，报告样例请用 sample_generate。"""
@@ -99,22 +146,12 @@ def sample_generate(
     temperature: float = 0.8,
     top_k: int | None = 50,
 ) -> torch.Tensor:
-    """按概率抽样。temperature=0 退化为 greedy；top_k 限制每步只看分数最高的 k 个。"""
+    """无 cache：每步把窗口再算一遍。temperature=0 退化为 greedy。"""
     was_training = model.training
     model.eval()
     for _ in range(max_new_tokens):
         logits, _ = model(idx[:, -block_size:])
-        logits = logits[:, -1, :]
-        if temperature <= 0:
-            next_id = torch.argmax(logits, dim=-1, keepdim=True)
-        else:
-            logits = logits / temperature
-            if top_k is not None and top_k > 0:
-                k = min(top_k, logits.size(-1))
-                thresh = torch.topk(logits, k, dim=-1).values[:, -1:]
-                logits = logits.masked_fill(logits < thresh, float("-inf"))
-            probs = F.softmax(logits, dim=-1)
-            next_id = torch.multinomial(probs, num_samples=1)
+        next_id = sample_next_id(logits[:, -1, :], temperature=temperature, top_k=top_k)
         idx = torch.cat([idx, next_id], dim=1)
     if was_training:
         model.train()

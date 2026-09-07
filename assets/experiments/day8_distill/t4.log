@@ -1,0 +1,341 @@
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+student_init checkpoints/shakespeare_perdoc/best.pt
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2599.16it/s]
+teacher=gpt2  frozen  amp=torch.bfloat16  scaler=False
+before  student_val_ce=3.5112  student_ppl=33.49  teacher_val_ce=4.1255  teacher_ppl=61.90
+note: Teacher 在这套莎士比亚 val 上比 Student 差。蒸馏是方法练习，不要覆盖 shakespeare_perdoc/best.pt。
+distill  temperature=4.0  alpha=0.7  L=α T² KL + (1-α) CE
+step 00001  loss=4.1913  ce=3.1692  kl=0.2893  kd=4.6293  lr=1.00e-04
+step 00020  loss=3.6551  ce=3.1454  kl=0.2421  kd=3.8735  lr=1.00e-04
+step 00040  loss=3.0864  ce=2.9973  kl=0.1953  kd=3.1247  lr=1.00e-04
+step 00060  loss=2.8013  ce=3.5642  kl=0.1547  kd=2.4744  lr=1.00e-04
+step 00080  loss=2.3465  ce=2.9737  kl=0.1299  kd=2.0777  lr=1.00e-04
+step 00100  loss=2.1798  ce=3.1683  kl=0.1098  kd=1.7562  lr=1.00e-04
+step 00100  val_ce=3.5680  val_ppl=35.45
+saved best.pt  val_ce=3.5680  step=100
+step 00120  loss=2.1545  ce=2.8363  kl=0.1164  kd=1.8623  lr=1.00e-04
+step 00140  loss=2.1161  ce=3.4440  kl=0.0967  kd=1.5471  lr=1.00e-04
+step 00160  loss=1.9240  ce=3.2189  kl=0.0856  kd=1.3691  lr=1.00e-04
+step 00180  loss=1.9602  ce=3.2640  kl=0.0876  kd=1.4014  lr=1.00e-04
+step 00200  loss=1.9155  ce=3.2173  kl=0.0848  kd=1.3576  lr=1.00e-04
+step 00200  val_ce=3.5038  val_ppl=33.24
+saved best.pt  val_ce=3.5038  step=200
+sample: ROMEO: 
+That love, now on love, not, 
+And when the love is not dead, 
+Thy death, thy love and thy love, thy tears, 
+That all this love, that hast thou, even my heart, 
+For I be dead, and I, but I do not know thee; 
+Thou dost not to be as a heart
+step 00220  loss=1.8245  ce=3.0767  kl=0.0805  kd=1.2879  lr=1.00e-04
+step 00240  loss=1.7563  ce=2.5831  kl=0.0876  kd=1.4019  lr=1.00e-04
+step 00260  loss=1.7531  ce=2.7366  kl=0.0832  kd=1.3316  lr=1.00e-04
+step 00280  loss=1.7840  ce=3.4070  kl=0.0680  kd=1.0884  lr=1.00e-04
+step 00300  loss=1.6969  ce=3.0701  kl=0.0693  kd=1.1085  lr=1.00e-04
+step 00300  val_ce=3.4831  val_ppl=32.56
+saved best.pt  val_ce=3.4831  step=300
+step 00320  loss=1.7002  ce=2.8495  kl=0.0755  kd=1.2077  lr=1.00e-04
+step 00340  loss=1.8139  ce=3.4960  kl=0.0683  kd=1.0929  lr=1.00e-04
+step 00360  loss=1.6521  ce=3.4496  kl=0.0551  kd=0.8817  lr=1.00e-04
+step 00380  loss=1.7340  ce=3.2901  kl=0.0667  kd=1.0671  lr=1.00e-04
+step 00400  loss=1.6485  ce=2.9169  kl=0.0691  kd=1.1049  lr=1.00e-04
+step 00400  val_ce=3.4702  val_ppl=32.14
+saved best.pt  val_ce=3.4702  step=400
+sample: ROMEO: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ACT I 
+ 
+Scene I. A Room in Cleopatra. 
+ 
+SCENE I. A Room in the Duke’s House. 
+ 
+ Enter Lady, King and Don Pedro, Queen, Sir Andrew, Attendants. 
+ 
+TRELEN.
+step 00420  loss=1.4237  ce=2.3082  kl=0.0653  kd=1.0446  lr=1.00e-04
+step 00440  loss=1.7115  ce=3.1415  kl=0.0687  kd=1.0987  lr=1.00e-04
+step 00460  loss=1.8389  ce=3.2618  kl=0.0768  kd=1.2290  lr=1.00e-04
+step 00480  loss=1.5719  ce=3.0031  kl=0.0599  kd=0.9585  lr=1.00e-04
+step 00500  loss=1.6158  ce=2.5311  kl=0.0765  kd=1.2235  lr=1.00e-04
+step 00500  val_ce=3.4660  val_ppl=32.01
+saved best.pt  val_ce=3.4660  step=500
+step 00520  loss=1.5626  ce=3.0568  kl=0.0576  kd=0.9223  lr=1.00e-04
+step 00540  loss=1.6595  ce=3.1945  kl=0.0626  kd=1.0017  lr=1.00e-04
+step 00560  loss=1.6790  ce=3.1924  kl=0.0644  kd=1.0304  lr=1.00e-04
+step 00580  loss=1.6271  ce=2.9500  kl=0.0663  kd=1.0602  lr=1.00e-04
+step 00600  loss=1.5043  ce=2.8813  kl=0.0571  kd=0.9142  lr=1.00e-04
+step 00600  val_ce=3.4513  val_ppl=31.54
+saved best.pt  val_ce=3.4513  step=600
+sample: ROMEO: 
+O, that thou art that want of thyself 
+To be thy deeds, to see thy words alone! 
+And therefore do I love thee, that all of thee, 
+I would have done thee for thy master’s voice, 
+That thou, in thy love, shall never make me love. 
+ 
+ 
+ROMEO. 
+
+step 00620  loss=1.6170  ce=3.1386  kl=0.0603  kd=0.9649  lr=1.00e-04
+step 00640  loss=1.5629  ce=3.0650  kl=0.0574  kd=0.9192  lr=1.00e-04
+step 00660  loss=1.4948  ce=2.6534  kl=0.0624  kd=0.9983  lr=1.00e-04
+step 00680  loss=1.4958  ce=2.7953  kl=0.0587  kd=0.9389  lr=1.00e-04
+step 00700  loss=1.5420  ce=3.1587  kl=0.0531  kd=0.8491  lr=1.00e-04
+step 00700  val_ce=3.4519  val_ppl=31.56
+no improve  bad_evals=1/4
+step 00720  loss=1.4984  ce=2.9497  kl=0.0548  kd=0.8765  lr=1.00e-04
+step 00740  loss=1.3504  ce=2.3546  kl=0.0575  kd=0.9200  lr=1.00e-04
+step 00760  loss=1.5149  ce=3.0873  kl=0.0526  kd=0.8411  lr=1.00e-04
+step 00780  loss=1.5755  ce=2.9510  kl=0.0616  kd=0.9860  lr=1.00e-04
+step 00800  loss=1.5511  ce=3.2276  kl=0.0520  kd=0.8326  lr=1.00e-04
+step 00800  val_ce=3.4464  val_ppl=31.39
+saved best.pt  val_ce=3.4464  step=800
+sample: ROMEO: 
+ 
+AENEAS. 
+Nay, as I have. 
+ 
+ Enter. 
+ 
+NESTOR. 
+My lord, I pray you, 
+I know not what I have done; but now, 
+My heart shall never have my fault in me. 
+ 
+JULIET. 
+I will I,
+wall=104.7s  steps=800  step/s=7.64
+peak_mem_MiB=2845.3
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+student_init checkpoints/shakespeare_perdoc/best.pt
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights:  85%|████████▌ | 126/148 [00:00<00:00, 1259.44it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 1005.73it/s]
+teacher=gpt2  frozen  amp=torch.bfloat16  scaler=False
+before  student_val_ce=3.5112  student_ppl=33.49  teacher_val_ce=4.1255  teacher_ppl=61.90
+note: Teacher 在这套莎士比亚 val 上比 Student 差。蒸馏是方法练习，不要覆盖 shakespeare_perdoc/best.pt。
+resume checkpoints/distill_t4/last.pt  from_step=800
+distill  temperature=4.0  alpha=0.7  L=α T² KL + (1-α) CE
+step 00820  loss=1.4770  ce=2.8546  kl=0.0554  kd=0.8866  lr=1.00e-04
+step 00840  loss=1.4688  ce=2.8261  kl=0.0554  kd=0.8871  lr=1.00e-04
+step 00860  loss=1.4898  ce=3.0704  kl=0.0508  kd=0.8124  lr=1.00e-04
+step 00880  loss=1.6153  ce=2.9672  kl=0.0647  kd=1.0359  lr=1.00e-04
+step 00900  loss=1.5320  ce=3.2217  kl=0.0505  kd=0.8078  lr=1.00e-04
+step 00900  val_ce=3.4559  val_ppl=31.69
+no improve  bad_evals=1/4
+step 00920  loss=1.5175  ce=2.8963  kl=0.0579  kd=0.9266  lr=1.00e-04
+step 00940  loss=1.4732  ce=2.9471  kl=0.0526  kd=0.8416  lr=1.00e-04
+step 00960  loss=1.5707  ce=2.9977  kl=0.0600  kd=0.9592  lr=1.00e-04
+step 00980  loss=1.5164  ce=3.0943  kl=0.0525  kd=0.8402  lr=1.00e-04
+step 01000  loss=1.4447  ce=2.7037  kl=0.0566  kd=0.9052  lr=1.00e-04
+step 01000  val_ce=3.4466  val_ppl=31.39
+no improve  bad_evals=2/4
+sample: ROMEO: 
+That’s not to take this jot; for ’tis time 
+In the day’s eye. 
+ 
+JULIET. 
+A heavy one. 
+ 
+LADY MACBETH. 
+This is the love I would be mad. 
+ 
+ [_FLEAR. An Apartment in the
+step 01020  loss=1.5790  ce=3.0917  kl=0.0582  kd=0.9307  lr=1.00e-04
+step 01040  loss=1.5181  ce=3.1266  kl=0.0518  kd=0.8288  lr=1.00e-04
+step 01060  loss=1.6094  ce=3.2603  kl=0.0564  kd=0.9018  lr=1.00e-04
+step 01080  loss=1.6268  ce=3.2056  kl=0.0594  kd=0.9502  lr=1.00e-04
+step 01100  loss=1.5592  ce=2.9803  kl=0.0594  kd=0.9502  lr=1.00e-04
+step 01100  val_ce=3.4409  val_ppl=31.21
+saved best.pt  val_ce=3.4409  step=1100
+step 01120  loss=1.4361  ce=2.9317  kl=0.0497  kd=0.7951  lr=1.00e-04
+step 01140  loss=1.5083  ce=3.0583  kl=0.0527  kd=0.8439  lr=1.00e-04
+step 01160  loss=1.6124  ce=3.3460  kl=0.0543  kd=0.8694  lr=1.00e-04
+step 01180  loss=1.5420  ce=2.7863  kl=0.0630  kd=1.0088  lr=1.00e-04
+step 01200  loss=1.4253  ce=2.8388  kl=0.0512  kd=0.8195  lr=1.00e-04
+step 01200  val_ce=3.4354  val_ppl=31.04
+saved best.pt  val_ce=3.4354  step=1200
+sample: ROMEO: 
+ 
+ROMEO. 
+In so much; 
+I am as well a gentleman. 
+ 
+ROMEO. 
+Here is my hand. 
+ 
+JULIET. 
+Why, I have for thee. 
+ 
+ROMEO. 
+O, let not aught but for the love. 
+Why, there�
+step 01220  loss=1.5644  ce=3.2688  kl=0.0521  kd=0.8340  lr=1.00e-04
+step 01240  loss=1.5065  ce=3.0409  kl=0.0531  kd=0.8489  lr=1.00e-04
+step 01260  loss=1.4683  ce=2.7949  kl=0.0562  kd=0.8997  lr=1.00e-04
+step 01280  loss=1.5514  ce=3.0884  kl=0.0558  kd=0.8926  lr=1.00e-04
+step 01300  loss=1.5988  ce=3.3109  kl=0.0541  kd=0.8651  lr=1.00e-04
+step 01300  val_ce=3.4375  val_ppl=31.11
+no improve  bad_evals=1/4
+step 01320  loss=1.4699  ce=2.8195  kl=0.0557  kd=0.8915  lr=1.00e-04
+step 01340  loss=1.5219  ce=3.0365  kl=0.0545  kd=0.8727  lr=1.00e-04
+step 01360  loss=1.5690  ce=3.0538  kl=0.0583  kd=0.9326  lr=1.00e-04
+step 01380  loss=1.3963  ce=2.7678  kl=0.0505  kd=0.8085  lr=1.00e-04
+step 01400  loss=1.3960  ce=2.6771  kl=0.0529  kd=0.8470  lr=1.00e-04
+step 01400  val_ce=3.4303  val_ppl=30.89
+saved best.pt  val_ce=3.4303  step=1400
+sample: ROMEO: 
+The music is all her, the sun is mine. 
+ 
+COUNTESS. 
+You are the poor madman you have not so, 
+But in your kind self you have no voice, 
+And you will go with me to my bed and me. 
+ 
+DION. 
+O sweet queen, I’ll be your servant
+step 01420  loss=1.3650  ce=2.7202  kl=0.0490  kd=0.7842  lr=1.00e-04
+step 01440  loss=1.4886  ce=3.1760  kl=0.0478  kd=0.7654  lr=1.00e-04
+step 01460  loss=1.4700  ce=3.0243  kl=0.0502  kd=0.8038  lr=1.00e-04
+step 01480  loss=1.5712  ce=3.3686  kl=0.0501  kd=0.8008  lr=1.00e-04
+step 01500  loss=1.5065  ce=3.2381  kl=0.0478  kd=0.7645  lr=1.00e-04
+step 01500  val_ce=3.4355  val_ppl=31.05
+no improve  bad_evals=1/4
+step 01520  loss=1.4593  ce=2.7837  kl=0.0557  kd=0.8917  lr=1.00e-04
+step 01540  loss=1.4705  ce=2.9052  kl=0.0535  kd=0.8556  lr=1.00e-04
+step 01560  loss=1.5219  ce=2.9320  kl=0.0573  kd=0.9176  lr=1.00e-04
+step 01580  loss=1.4366  ce=3.2052  kl=0.0424  kd=0.6787  lr=1.00e-04
+step 01600  loss=1.5606  ce=2.9970  kl=0.0591  kd=0.9450  lr=1.00e-04
+step 01600  val_ce=3.4298  val_ppl=30.87
+saved best.pt  val_ce=3.4298  step=1600
+sample: ROMEO: 
+ But now in all these souls that make thee sick. 
+ 
+ 
+ DON PEDRO. 
+
+ 
+ 
+ DON PEDRO. 
+ If not, I will not be a boy. 
+ 
+ 
+ CLAUDIO. 
+ And yet I will not be with you, Sir John, for your sake, 
+ I will
+step 01620  loss=1.5546  ce=3.2983  kl=0.0505  kd=0.8074  lr=1.00e-04
+step 01640  loss=1.4163  ce=2.8035  kl=0.0514  kd=0.8218  lr=1.00e-04
+step 01660  loss=1.4247  ce=3.0334  kl=0.0460  kd=0.7352  lr=1.00e-04
+step 01680  loss=1.5782  ce=3.2812  kl=0.0530  kd=0.8484  lr=1.00e-04
+step 01700  loss=1.5165  ce=3.2948  kl=0.0471  kd=0.7544  lr=1.00e-04
+step 01700  val_ce=3.4323  val_ppl=30.95
+no improve  bad_evals=1/4
+step 01720  loss=1.5060  ce=3.1294  kl=0.0506  kd=0.8103  lr=1.00e-04
+step 01740  loss=1.4112  ce=2.9428  kl=0.0472  kd=0.7548  lr=1.00e-04
+step 01760  loss=1.3750  ce=2.6144  kl=0.0527  kd=0.8438  lr=1.00e-04
+step 01780  loss=1.5815  ce=3.2982  kl=0.0529  kd=0.8457  lr=1.00e-04
+step 01800  loss=1.5670  ce=3.2278  kl=0.0534  kd=0.8552  lr=1.00e-04
+step 01800  val_ce=3.4268  val_ppl=30.78
+saved best.pt  val_ce=3.4268  step=1800
+sample: ROMEO: 
+I am in love. 
+ 
+BENVOLIO. 
+What, are these too long? 
+ 
+BENVOLIO. 
+Well, we have. 
+ 
+ROMEO. 
+I am sorry, 
+I never heard what I can do here. 
+ 
+ROMEO. 
+That’s too great
+step 01820  loss=1.4745  ce=2.8844  kl=0.0544  kd=0.8703  lr=1.00e-04
+step 01840  loss=1.4586  ce=2.8892  kl=0.0528  kd=0.8456  lr=1.00e-04
+step 01860  loss=1.4474  ce=3.0151  kl=0.0485  kd=0.7755  lr=1.00e-04
+step 01880  loss=1.5307  ce=3.0711  kl=0.0544  kd=0.8705  lr=1.00e-04
+step 01900  loss=1.5517  ce=3.3408  kl=0.0491  kd=0.7849  lr=1.00e-04
+step 01900  val_ce=3.4243  val_ppl=30.70
+saved best.pt  val_ce=3.4243  step=1900
+step 01920  loss=1.4804  ce=3.1355  kl=0.0482  kd=0.7711  lr=1.00e-04
+step 01940  loss=1.3892  ce=2.8320  kl=0.0482  kd=0.7708  lr=1.00e-04
+step 01960  loss=1.5828  ce=3.3879  kl=0.0506  kd=0.8091  lr=1.00e-04
+step 01980  loss=1.4976  ce=3.1189  kl=0.0502  kd=0.8028  lr=1.00e-04
+step 02000  loss=1.4846  ce=3.1008  kl=0.0495  kd=0.7919  lr=1.00e-04
+step 02000  val_ce=3.4188  val_ppl=30.53
+saved best.pt  val_ce=3.4188  step=2000
+sample: ROMEO: 
+ 
+ 
+OCTAVIA. 
+O that I see, 
+If the air of heaven have done as good 
+As thou a stranger born. 
+ 
+MARDIAN. 
+Now, O, how much that is! 
+ 
+BANBETER. 
+O, ’tis a night to go. 
+
+wall=179.9s  steps=1200  step/s=6.67
+peak_mem_MiB=3111.0
+split=per_doc  docs=43  val_docs=43  train_tok=1756328  val_tok=194990  seed=42  no_val_window=0
+student_init checkpoints/shakespeare_perdoc/best.pt
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2733.67it/s]
+teacher=gpt2  frozen  amp=torch.bfloat16  scaler=False
+before  student_val_ce=3.5112  student_ppl=33.49  teacher_val_ce=4.1255  teacher_ppl=61.90
+note: Teacher 在这套莎士比亚 val 上比 Student 差。蒸馏是方法练习，不要覆盖 shakespeare_perdoc/best.pt。
+resume checkpoints/distill_t4/last.pt  from_step=2000
+distill  temperature=4.0  alpha=0.7  L=α T² KL + (1-α) CE
+step 02020  loss=1.5914  ce=3.3762  kl=0.0517  kd=0.8265  lr=1.00e-04
+step 02040  loss=1.5322  ce=3.2876  kl=0.0487  kd=0.7799  lr=1.00e-04
+step 02060  loss=1.3374  ce=2.7015  kl=0.0470  kd=0.7528  lr=1.00e-04
+step 02080  loss=1.3432  ce=2.6552  kl=0.0488  kd=0.7809  lr=1.00e-04
+step 02100  loss=1.5195  ce=3.2232  kl=0.0493  kd=0.7893  lr=1.00e-04
+step 02100  val_ce=3.4275  val_ppl=30.80
+no improve  bad_evals=1/4
+step 02120  loss=1.3301  ce=2.5795  kl=0.0497  kd=0.7946  lr=1.00e-04
+step 02140  loss=1.4225  ce=3.0953  kl=0.0441  kd=0.7057  lr=1.00e-04
+step 02160  loss=1.4421  ce=2.9807  kl=0.0489  kd=0.7828  lr=1.00e-04
+step 02180  loss=1.4502  ce=3.0199  kl=0.0486  kd=0.7775  lr=1.00e-04
+step 02200  loss=1.3537  ce=2.6535  kl=0.0498  kd=0.7966  lr=1.00e-04
+step 02200  val_ce=3.4291  val_ppl=30.85
+no improve  bad_evals=2/4
+sample: ROMEO: 
+Thy name is Grecian, if thy father die, 
+His mother’s son. 
+ 
+ [_Exit._] 
+ 
+SCENE I. Before the palace. 
+ 
+ Enter Caesar and his friend. 
+ 
+IMOGEN. 
+O, sir, here comes the soldier; with some other, 
+
+step 02220  loss=1.3358  ce=2.7377  kl=0.0459  kd=0.7351  lr=1.00e-04
+step 02240  loss=1.5787  ce=3.2762  kl=0.0532  kd=0.8513  lr=1.00e-04
+step 02260  loss=1.3986  ce=2.7908  kl=0.0501  kd=0.8020  lr=1.00e-04
+step 02280  loss=1.4081  ce=2.8273  kl=0.0500  kd=0.7999  lr=1.00e-04
+step 02300  loss=1.4937  ce=3.0319  kl=0.0522  kd=0.8345  lr=1.00e-04
+step 02300  val_ce=3.4311  val_ppl=30.91
+no improve  bad_evals=3/4
+step 02320  loss=1.4504  ce=2.9668  kl=0.0500  kd=0.8005  lr=1.00e-04
+step 02340  loss=1.3871  ce=2.7535  kl=0.0501  kd=0.8015  lr=1.00e-04
+step 02360  loss=1.4505  ce=2.8001  kl=0.0545  kd=0.8721  lr=1.00e-04
+step 02380  loss=1.5195  ce=3.1951  kl=0.0501  kd=0.8013  lr=1.00e-04
+step 02400  loss=1.3473  ce=2.6311  kl=0.0498  kd=0.7971  lr=1.00e-04
+step 02400  val_ce=3.4363  val_ppl=31.07
+no improve  bad_evals=4/4
+early_stop  step=2400  best_step=2000
+wall=58.1s  steps=400  step/s=6.89
+peak_mem_MiB=3111.0
