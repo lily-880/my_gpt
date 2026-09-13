@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 from my_gpt.checkpoint import gpt_config_from_checkpoint, load_checkpoint, save_checkpoint
 from my_gpt.dataloader import build_dataloaders, load_pretrain_documents
+from my_gpt.efficiency import count_params, efficiency_metrics, print_efficiency
 from my_gpt.gpt import GPT, GPTConfig
 from my_gpt.optim import build_optimizer, cosine_lr, set_optimizer_lr
 from my_gpt.tokenizer import GPT2TokenizerWrapper
@@ -205,6 +206,7 @@ def run_train(
     elapsed = time.perf_counter() - t0
     n_done = max_steps - start_step
     print(f"wall={elapsed:.1f}s  steps={n_done}  step/s={n_done / max(elapsed, 1e-9):.2f}")
+    peak_mib = None
     if device.type == "cuda":
         peak_mib = torch.cuda.max_memory_allocated(device) / (1024**2)
         print(f"peak_mem_MiB={peak_mib:.1f}")
@@ -217,6 +219,18 @@ def run_train(
     last_metrics["early_stop"] = stopped_early
     last_metrics["best_step"] = state.get("best_step")
     last_metrics["best_val_loss"] = state.get("best_val_loss")
+    best_val = state.get("best_val_loss")
+    if best_val is not None:
+        eff = efficiency_metrics(
+            float(best_val),
+            count_params(model),
+            elapsed,
+            peak_mib,
+            vocab_size=int(gpt_cfg.vocab_size),
+        )
+        print_efficiency(eff)
+        last_metrics.update(eff)
+        state.update(eff)
     save_train_state(ckpt_dir, state)
     return last_metrics
 
